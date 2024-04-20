@@ -26,3 +26,22 @@ class UserLoginView(View):
         else:
             messages.error(request, "نام کاربری یا رمز عبور اشتباه است", 'danger')
             return redirect("account:user_login")
+        
+
+class UserLogoutView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            logout(request)
+            messages.success(request , 'شمار از حساب خود خارج شدید' , 'success')
+        return redirect("home:index")
+    
+    def post(self, request):
+        if request.user.is_authenticated:
+            logout(request)
+            messages.success(request , 'شمار از حساب خود خارج شدید' , 'success')
+        return redirect("home:index")
+
+
+class UserRegisterView(View):
+    pass 
+

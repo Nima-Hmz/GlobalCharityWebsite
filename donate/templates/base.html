@@ -118,9 +118,15 @@
 										<a class="nav-link" href="{% url 'home:about_us' %}">درباره ما</a>
 									</li>
 
+									{% if user.is_authenticated %}
+									<li class="nav-item">
+										<a class="nav-link" href="{% url 'account:user_logout' %}">خروج</a>
+									</li>
+									{% else %}
 									<li class="nav-item">
 										<a class="nav-link" href="{% url 'account:user_login' %}">ورود</a>
 									</li>
+									{% endif %}
 								</ul>
 							</div>
 
