@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3></h3>
 
     <!-- page header -->
     <section class="page-header">
@@ -18,6 +17,9 @@
         </div>
     </section>
 
+<section class="main-content">
+    <div class="container-xl">
+
     <!-- widget newsletter -->
     <div class="widget rounded">
         <div class="widget-header text-center">
@@ -33,9 +35,12 @@
                 <button class="btn btn-default btn-full" type="submit">ورود</button>
             </form>
             
-            <span class="newsletter-privacy text-center mt-3">هنوز حسابی ندارید؟ <a href="#">ثبت نام</a></span>
+            <span class="newsletter-privacy text-center mt-3">هنوز حسابی ندارید؟ <a href="{% url 'account:user_register' %}">ثبت نام</a></span>
         </div>
     </div>
+
+</div>
+</section>
 
 
 {% endblock %}
