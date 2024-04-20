@@ -110,19 +110,16 @@
 										</ul> -->
 									</li>
 
-									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#">صفحات</a>
-										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="category.html">دسته بندی</a></li>
-											<li><a class="dropdown-item" href="{% url 'blog:blog_index' %}">جزییات وبلاگ 1</a></li>
-											<li><a class="dropdown-item" href="{% url 'blog:blog_detail' %}">جزییات وبلاگ 2</a></li>
-										</ul>
-									</li>
+
 									<li class="nav-item">
 										<a class="nav-link" href="{% url 'home:contact_us' %}">تماس با ما</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="{% url 'home:about_us' %}">درباره ما</a>
+									</li>
+
+									<li class="nav-item">
+										<a class="nav-link" href="{% url 'account:user_login' %}">ورود</a>
 									</li>
 								</ul>
 							</div>
@@ -144,7 +141,7 @@
 	</header>
 	{% if messages %}
 
-        {% for msg in messages %}
+        {% for msg in messages %}	
             <p class="alert alert-{{msg.tags}}"  id="msg"> {{msg}} </p>
         {% endfor %}
 
