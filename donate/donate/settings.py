@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'stock.apps.StockConfig',
     'blog.apps.BlogConfig',
+    'donate_logs.apps.DonateLogsConfig',
 ]
 
 MIDDLEWARE = [
