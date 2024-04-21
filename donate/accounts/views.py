@@ -124,6 +124,7 @@ class UserRegisterVertifyView(View):
                 user = User.objects.create_user(phone_number=user_session['phone_number'], full_name=user_session['username'], display_name=display_name1, password=user_session['password'])
                 user.save()
                 code_instance.delete()
+                del request.session['user_registration_info']
                 messages.success(request, "حساب کاربری شما ایجاد شد", 'success')
 
                 #  login after register 
@@ -215,6 +216,7 @@ class ForgotPasswordVertifyView(View):
             else:
                 code_instance.delete()
                 messages.error(request, "زمان شما به اتمام رسید", 'danger')
+                del request.session['0']
                 return redirect("home:index")
         else:
             messages.error(request, "کد اشتباه است دوباره امتحان کنید", 'danger')
@@ -246,6 +248,12 @@ class ForgotPasswordNewView(View):
             customer = User.objects.get(phone_number=request.session['0'])
             customer.set_password(password)
             customer.save()
+            del request.session['0']
             messages.success(request, "رمز شما تغییر کرد اکنون میتوانید با رمز جدید وارد حساب خود شوید", 'success')
             return redirect("home:index")
+        else:
+            del request.session['0']
+            messages.error(request, "خطا دوباره تلاش کنید", 'danger')
+            return redirect('home:index')
+            
         
