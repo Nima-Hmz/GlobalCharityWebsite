@@ -22,5 +22,5 @@ urlpatterns = [
     path('accounts/' , include('accounts.urls')),
     path('stock/' , include('stock.urls', namespace="stock_place")),
     path('blog/' , include('blog.urls', namespace="blog")),
-    path('donate/', include('donate_logs.urls', namespace="donate_logs")),
+    path('donate/', include('donate_logs.urls')),
 ]

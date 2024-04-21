@@ -138,3 +138,7 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "accounts.User"
+
+
+SANDBOX = True
+MERCHANT = "6dd944ee-3913-4d58-8b49-b430c57d995c"
