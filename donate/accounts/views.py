@@ -141,3 +141,111 @@ class UserRegisterVertifyView(View):
             messages.error(request, "کد وارد شده اشتباه است", 'danger')
             return redirect('account:register_vertify')
 
+
+class ForgotPasswordView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            messages.error(request, "شما در حساب خود حضور دارید", 'danger')
+            return redirect("home:index")
+        else:
+            context = {
+        
+            }
+            return render(request, "accounts/reset-password.html", context)
+            
+    def post(self, request):
+        if request.user.is_authenticated:
+            messages.error(request, "شما در حساب خود حضور دارید", 'danger')
+            return redirect("home:index")
+        else:
+            phone_number = request.POST.get("phone_number")
+            if phone_number != "":
+                if User.objects.filter(phone_number=phone_number).exists():
+                    if OtpCodeModel.objects.filter(phone_number=phone_number).exists():
+                        messages.error(request, "دوباره تلاش کنید", 'danger')
+                        OtpCodeModel.objects.filter(phone_number=phone_number).delete()
+                        return redirect("account:forgot_password")
+
+                    reandom_code = random.randint(1000, 9999)
+                    send_otp_code(phone_number=phone_number, code=reandom_code)
+                    OtpCodeModel.objects.create(phone_number= phone_number, otp=reandom_code)
+
+                    request.session[0] = phone_number
+                    request.session.save()
+
+                    messages.success(request, "پیامک برای شما ارسال شد", 'success')
+                    return redirect("account:forgot_password_vertify")
+                else:
+                    messages.error(request, "چنین کاربری وجود ندارد دوباره امتحان کنید", 'danger')
+                    return redirect("account:forgot_password")
+            else:
+                messages.error(request, "فیلد درخواست شده را به درستی پر کنید", 'danger')
+                return redirect("account:forgot_password")
+            
+
+class ForgotPasswordVertifyView(View):
+    def get(self, request):
+        try:
+            x = request.session['0'] 
+            context = {
+        
+            }
+            return render(request, "accounts/register_vertify.html", context)
+        except:
+            messages.error(request, "خطا دوباره تلاش کنید", 'danger')
+            return redirect("home:index")
+        
+    def post(self, request):
+        try:
+            user_session = request.session["0"]
+            code_instance = OtpCodeModel.objects.get(phone_number=user_session)
+            user_input = int(request.POST.get("vertifycode"))
+        except:
+            messages.error(request, "خطا دوباره تلاش کنید", 'danger')
+            return redirect("home:index")
+
+        if user_input == code_instance.otp:
+            temp = code_instance.created
+            temp += my_datetime.timedelta(seconds=120)
+            now = timezone.now()
+            if now < temp:
+                code_instance.delete()
+                messages.success(request, "شماره شما تایید شد. اکنون رمز جدید برای حساب خود ایجاد کنید", 'success')
+                return redirect("account:new_password")
+            else:
+                code_instance.delete()
+                messages.error(request, "زمان شما به اتمام رسید", 'danger')
+                return redirect("home:index")
+        else:
+            messages.error(request, "کد اشتباه است دوباره امتحان کنید", 'danger')
+            return redirect("account:forgot_password_vertify")
+            
+
+
+class ForgotPasswordNewView(View):
+    def get(self, request):
+        try:
+            x = request.session['0'] 
+            context = {
+        
+            }
+            return render(request, "accounts/reset-password2.html", context)
+        except:
+            messages.error(request, "خطا دوباره تلاش کنید", 'danger')
+            return redirect("home:index")
+    
+    def post(self, request):
+        try:
+            x = request.session['0']
+        except:
+            messages.error(request, "خطا دوباره تلاش کنید", 'danger')
+            return redirect("home:index")
+
+        password = request.POST.get("password")
+        if password != "":
+            customer = User.objects.get(phone_number=request.session['0'])
+            customer.set_password(password)
+            customer.save()
+            messages.success(request, "رمز شما تغییر کرد اکنون میتوانید با رمز جدید وارد حساب خود شوید", 'success')
+            return redirect("home:index")
+        
