@@ -9,6 +9,7 @@ class blogModel(models.Model):
     status  = models.BooleanField(default=True , verbose_name='وضعیت انتشار')
     created = models.DateTimeField(auto_now_add = True, verbose_name="ایجاد شده")
     updated = models.DateTimeField(auto_now=True, verbose_name="به‌روز شده")
+    lovely  = models.BooleanField(default=False , verbose_name='محبوب')
 
     class Meta:
         ordering = ("-updated",)

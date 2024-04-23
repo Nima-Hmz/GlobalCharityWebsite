@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load jalali_tags %}
 {% block content %}
 
     <section class="hero-carousel">
@@ -48,39 +49,32 @@
 			<div class="row gy-4">
 				<div class="col-lg-8">
 
-					<!-- post -->
+					{% for blog in blogs %}
+
+					<!-- blog -->
 					<div class="post post-classic rounded bordered">
 						<div class="thumb top-rounded">
-							<a href="category.html" class="category-badge lg position-absolute">سبک زندگی</a>
 							<span class="post-format">
 								<i class="icon-picture"></i>
 							</span>
-							<a href="blog-single.html">
+							<a href="{% url 'home:index' %}">
 								<div class="inner">
-									<img src="{% static 'assets/images/posts/post-lg-1.jpg' %}" alt="post-title" />
+									<img src="{{ blog.image.url }}" alt="post-title" />
 								</div>
 							</a>
 						</div>
 						<div class="details">
 							<ul class="meta list-inline mb-0">
-								<li class="list-inline-item"><a href="#"><img src="{% static 'assets/images/other/author-sm.png' %}" class="author" alt="author"/>کاتن</a></li>
-								<li class="list-inline-item">30 اردیبهشت 1401</li>
+								<li class="list-inline-item"> در تاریخ {{ blog.updated | to_jalali:'%y/%m/%d' }}</li>
 								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
 							</ul>
-							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">چگونه با ساختن در 1 ماه بهتر شویم</a></h5>
-							<p class="excerpt mb-0">خیلی دور، پشت کلمه کوه ها، دور از کشورهای Vokalia و Consonantia، متون کور زندگی می کنند. آنها جدا از هم در Bookmarksgrove درست در ساحل Semantics زندگی می کنند، یک اقیانوس زبان بزرگ.</p>
+							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">{{ blog.title }}</a></h5>
+							<p class="excerpt mb-0">{{ blog.body | safe | truncatewords:30 }}</p>
 						</div>
 						<div class="post-bottom clearfix d-flex align-items-center">
 							<div class="social-share me-auto">
 								<button class="toggle-button icon-share"></button>
-								<ul class="icons list-unstyled list-inline mb-0">
-									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
-								</ul>
+								
 							</div>
 							<div class="float-end d-none d-md-block">
 								<a href="blog-single.html" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
@@ -91,138 +85,22 @@
 						</div>
 					</div>
 
-					<!-- post -->
-					<div class="post post-classic rounded bordered">
-						<div class="thumb top-rounded">
-							<a href="category.html" class="category-badge lg position-absolute">الهام بخش</a>
-							<a href="blog-single.html">
-								<div class="inner">
-									<img src="{% static 'assets/images/posts/post-lg-2.jpg' %}" alt="post-title" />
-								</div>
-							</a>
-						</div>
-						<div class="details">
-							<ul class="meta list-inline mb-0">
-								<li class="list-inline-item"><a href="#"><img src="{% static 'assets/images/other/author-sm.png' %}" class="author" alt="author"/>کاتن</a></li>
-								<li class="list-inline-item">30 اردیبهشت 1401</li>
-								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
-							</ul>
-							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">10 راه برای شروع فوری فروش مبلمان</a></h5>
-							<p class="excerpt mb-0">خیلی دور، پشت کلمه کوه ها، دور از کشورهای Vokalia و Consonantia، متون کور زندگی می کنند. آنها جدا از هم در Bookmarksgrove درست در ساحل Semantics زندگی می کنند، یک اقیانوس زبان بزرگ.</p>
-						</div>
-						<div class="post-bottom clearfix d-flex align-items-center">
-							<div class="social-share me-auto">
-								<button class="toggle-button icon-share"></button>
-								<ul class="icons list-unstyled list-inline mb-0">
-									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
-								</ul>
-							</div>
-							<div class="float-end d-none d-md-block">
-								<a href="blog-single.html" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
-							</div>
-							<div class="more-button d-block d-md-none float-end">
-								<a href="blog-single.html"><span class="icon-options"></span></a>
-							</div>
-						</div>
-					</div>
-
-					<!-- post -->
-					<div class="post post-classic rounded bordered">
-						<div class="thumb top-rounded">
-							<a href="category.html" class="category-badge lg position-absolute">فرهنگ</a>
-							<span class="post-format">
-								<i class="icon-camrecorder"></i>
-							</span>
-							<a href="blog-single.html">
-								<div class="inner">
-									<img src="{% static 'assets/images/posts/post-lg-3.jpg' %}" alt="post-title" />
-								</div>
-							</a>
-						</div>
-						<div class="details">
-							<ul class="meta list-inline mb-0">
-								<li class="list-inline-item"><a href="#"><img src="{% static 'assets/images/other/author-sm.png' %}" class="author" alt="author"/>کاتن</a></li>
-								<li class="list-inline-item">30 اردیبهشت 1401</li>
-								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
-							</ul>
-							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">مهم ترین چیزی که باید در مورد شنا بدانید</a></h5>
-							<p class="excerpt mb-0">خیلی دور، پشت کلمه کوه ها، دور از کشورهای Vokalia و Consonantia، متون کور زندگی می کنند. آنها جدا از هم در Bookmarksgrove درست در ساحل Semantics زندگی می کنند، یک اقیانوس زبان بزرگ.</p>
-						</div>
-						<div class="post-bottom clearfix d-flex align-items-center">
-							<div class="social-share me-auto">
-								<button class="toggle-button icon-share"></button>
-								<ul class="icons list-unstyled list-inline mb-0">
-									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
-								</ul>
-							</div>
-							<div class="float-end d-none d-md-block">
-								<a href="blog-single.html" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
-							</div>
-							<div class="more-button d-block d-md-none float-end">
-								<a href="blog-single.html"><span class="icon-options"></span></a>
-							</div>
-						</div>
-					</div>
-
-					<!-- post -->
-					<div class="post post-classic rounded bordered">
-						<div class="thumb top-rounded">
-							<a href="category.html" class="category-badge lg position-absolute">سبک زندگی</a>
-							<a href="blog-single.html">
-								<div class="inner">
-									<img src="{% static 'assets/images/posts/post-lg-4.jpg' %}" alt="post-title" />
-								</div>
-							</a>
-						</div>
-						<div class="details">
-							<ul class="meta list-inline mb-0">
-								<li class="list-inline-item"><a href="#"><img src="{% static 'assets/images/other/author-sm.png' %}" class="author" alt="author"/>کاتن</a></li>
-								<li class="list-inline-item">30 اردیبهشت 1401</li>
-								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
-							</ul>
-							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">نور شما نزدیک به توقف شدن است:</a></h5>
-							<p class="excerpt mb-0">خیلی دور، پشت کلمه کوه ها، دور از کشورهای Vokalia و Consonantia، متون کور زندگی می کنند. آنها جدا از هم در Bookmarksgrove درست در ساحل Semantics زندگی می کنند، یک اقیانوس زبان بزرگ.</p>
-						</div>
-						<div class="post-bottom clearfix d-flex align-items-center">
-							<div class="social-share me-auto">
-								<button class="toggle-button icon-share"></button>
-								<ul class="icons list-unstyled list-inline mb-0">
-									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a></li>
-								</ul>
-							</div>
-							<div class="float-end d-none d-md-block">
-								<a href="blog-single.html" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
-							</div>
-							<div class="more-button d-block d-md-none float-end">
-								<a href="blog-single.html"><span class="icon-options"></span></a>
-							</div>
-						</div>
-					</div>
-
+					{% endfor %}
+					{% if blogs.has_other_pages %}
 					<nav>
 						<ul class="pagination justify-content-center">
-							<li class="page-item active" aria-current="page">
-								<span class="page-link">1</span>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							{% for i in blogs.paginator.page_range %}
+                                {% if blogs.number == i %}
+								<li class="page-item active" aria-current="page">
+									<span class="page-link">{{i}}</span>
+								</li>
+								{% else %}
+								<li class="page-item"><a class="page-link" href="?page={{ i }}&{{checked}}">{{i}}</a></li>
+								{% endif %}
+                                {% endfor %}
 						</ul>
 					</nav>
+					{% endif %}
 
 				</div>
 
@@ -233,15 +111,11 @@
 						<!-- widget about -->
 						<div class="widget rounded">
 							<div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
-								<img src="{% static 'assets/images/logo.svg' %}" alt="logo" class="mb-4" />
-								<p class="mb-4">سلام، ما نویسنده محتوا هستیم که مجذوب مطالب مد روز، سلبریتی و سبک زندگی هستیم. ما به مشتریان کمک می کنیم محتوای مناسب را برای افراد مناسب ارائه دهند.</p>
+								<p class="mb-4">سلام، ما ... </p>
 								<ul class="social-icons list-unstyled list-inline mb-0">
-									<li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
 									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
 									<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
-									<li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -253,78 +127,29 @@
 								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
 							</div>
 							<div class="widget-content">
+								{% for blog in Lblogs %}
 								<!-- post -->
 								<div class="post post-list-sm circle">
 									<div class="thumb circle">
-										<span class="number">1</span>
+										<span class="number">{{ blog.id }}</span>
 										<a href="blog-single.html">
 											<div class="inner">
-												<img src="{% static 'assets/images/posts/tabs-1.jpg' %}" alt="post-title" />
+												<img src="{{ blog.image.url }}" alt="{{ blog.title }}" />
 											</div>
 										</a>
 									</div>
 									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">3 راه آسان برای سریعتر کردن آیفون</a></h6>
+										<h6 class="post-title my-0"><a href="blog-single.html">{{ blog.title }}</a></h6>
 										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
+											<li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
 										</ul>
 									</div>
 								</div>
-								<!-- post -->
-								<div class="post post-list-sm circle">
-									<div class="thumb circle">
-										<span class="number">2</span>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="{% static 'assets/images/posts/tabs-2.jpg' %}" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">یک روش فوق العاده آسان که برای همه کار می کند</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
-										</ul>
-									</div>
-								</div>
-								<!-- post -->
-								<div class="post post-list-sm circle">
-									<div class="thumb circle">
-										<span class="number">3</span>
-										<a href="blog-single.html">
-											<div class="inner">
-												<img src="{% static 'assets/images/posts/tabs-3.jpg' %}" alt="post-title" />
-											</div>
-										</a>
-									</div>
-									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">10 راه برای شروع فوری فروش مبلمان</a></h6>
-										<ul class="meta list-inline mt-1 mb-0">
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
-										</ul>
-									</div>
-								</div>
+								{% endfor %}
 							</div>
 						</div>
 
-						<!-- widget categories -->
-						<div class="widget rounded">
-							<div class="widget-header text-center">
-								<h3 class="widget-title">کاوش موضوعات</h3>
-								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
-							</div>
-							<div class="widget-content">
-								<ul class="list">
-									<li><a href="#">سبک زندگی</a><span>(5)</span></li>
-									<li><a href="#">الهام بخش</a><span>(2)</span></li>
-									<li><a href="#">مد روز</a><span>(4)</span></li>
-									<li><a href="#">سیاست</a><span>(1)</span></li>
-									<li><a href="#">پرطرفدار</a><span>(7)</span></li>
-									<li><a href="#">فرهنگ</a><span>(3)</span></li>
-								</ul>
-							</div>
-
-						</div>
+						
 
 						<!-- widget newsletter -->
 						<div class="widget rounded">
@@ -344,92 +169,13 @@
 							</div>
 						</div>
 
-						<!-- widget post carousel -->
-						<div class="widget rounded">
-							<div class="widget-header text-center">
-								<h3 class="widget-title">جشن</h3>
-								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
-							</div>
-							<div class="widget-content">
-								<div class="post-carousel-widget">
-									<!-- post -->
-									<div class="post post-carousel">
-										<div class="thumb rounded">
-											<a href="category.html" class="category-badge position-absolute">چگونه</a>
-											<a href="blog-single.html">
-												<div class="inner">
-													<img src="{% static 'assets/images/widgets/widget-carousel-1.jpg' %}" alt="post-title" />
-												</div>
-											</a>
-										</div>
-										<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 راه آسان که می توانید آینده را به موفقیت تبدیل کنید</a></h5>
-										<ul class="meta list-inline mt-2 mb-0">
-											<li class="list-inline-item"><a href="#">کاتن</a></li>
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
-										</ul>
-									</div>
-									<!-- post -->
-									<div class="post post-carousel">
-										<div class="thumb rounded">
-											<a href="category.html" class="category-badge position-absolute">پرطرفدار</a>
-											<a href="blog-single.html">
-												<div class="inner">
-													<img src="{% static 'assets/images/widgets/widget-carousel-2.jpg' %}" alt="post-title" />
-												</div>
-											</a>
-										</div>
-										<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">با این 7 نکته بر هنر طبیعت مسلط شوید</a></h5>
-										<ul class="meta list-inline mt-2 mb-0">
-											<li class="list-inline-item"><a href="#">کاتن</a></li>
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
-										</ul>
-									</div>
-									<!-- post -->
-									<div class="post post-carousel">
-										<div class="thumb rounded">
-											<a href="category.html" class="category-badge position-absolute">چگونه</a>
-											<a href="blog-single.html">
-												<div class="inner">
-													<img src="{% static 'assets/images/widgets/widget-carousel-1.jpg' %}" alt="post-title" />
-												</div>
-											</a>
-										</div>
-										<h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 راه آسان که می توانید آینده را به موفقیت تبدیل کنید</a></h5>
-										<ul class="meta list-inline mt-2 mb-0">
-											<li class="list-inline-item"><a href="#">کاتن</a></li>
-											<li class="list-inline-item">30 اردیبهشت 1401</li>
-										</ul>
-									</div>
-								</div>
-								<!-- carousel arrows -->
-								<div class="slick-arrows-bot">
-									<button type="button" data-role="none" class="carousel-botNav-prev slick-custom-buttons" aria-label="بعدی"><i class="icon-arrow-right"></i></button>
-									<button type="button" data-role="none" class="carousel-botNav-next slick-custom-buttons" aria-label="قبلی"><i class="icon-arrow-left"></i></button>
-								</div>
-							</div>
-						</div>
-
+					
 						<!-- widget advertisement -->
 						<div class="widget no-container rounded text-md-center">
 							<span class="ads-title">- تبلیغات -</span>
 							<a href="#" class="widget-ads">
 								<img src="{% static 'assets/images/ads/ad-360.png' %}" alt="Advertisement" />
 							</a>
-						</div>
-
-						<!-- widget tags -->
-						<div class="widget rounded">
-							<div class="widget-header text-center">
-								<h3 class="widget-title">برچسب ها</h3>
-								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
-							</div>
-							<div class="widget-content">
-								<a href="#" class="tag">#پرطرفدار</a>
-								<a href="#" class="tag">#فیلم</a>
-								<a href="#" class="tag">#ویژه</a>
-								<a href="#" class="tag">#گالری</a>
-								<a href="#" class="tag">#سلبریتی</a>
-							</div>
 						</div>
 
 					</div>
