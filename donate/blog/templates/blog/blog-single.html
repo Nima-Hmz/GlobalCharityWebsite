@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load jalali_tags %}
 
 {% block content %}
 
@@ -7,181 +8,76 @@
     <section class="main-content mt-3">
         <div class="container-xl">
 
-
-
+        
             <div class="row gy-4">
 
                 <div class="col-lg-8">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item"><a href="#">الهام بخش</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">3 راه آسان برای سریعتر کردن آیفون</li>
+                            <li class="breadcrumb-item"><a href="{% url 'home:index' %}">صفحه اصلی</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ blog.title }}</li>
                         </ol>
                     </nav>
                     <!-- post single -->
                     <div class="post post-single">
                         <!-- post header -->
                         <div class="post-header">
-                            <h1 class="title mt-0 mb-3">3 راه آسان برای سریعتر کردن آیفون</h1>
+                            <h1 class="title mt-0 mb-3">{{ blog.title }}</h1>
                             <ul class="meta list-inline mb-0">
-                                <li class="list-inline-item"><a href="#"><img src="{% static 'assets/images/other/author-sm.png' %}"
-                                                                              class="author" alt="author"/>کاتن</a></li>
-                                <li class="list-inline-item"><a href="#">پرطرفدار</a></li>
-                                <li class="list-inline-item">30 اردیبهشت 1401</li>
+                                <li class="list-inline-item"></li>
+                                <li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d' }}</li>
                             </ul>
                         </div>
                         <!-- featured image -->
                         <div class="featured-image">
-                            <img src="{% static 'assets/images/posts/featured-lg.jpg' %}" alt="post-title"/>
+                            <img src="{{ blog.image.url }}" alt="post-title"/>
                         </div>
                         <!-- post content -->
                         <div class="post-content clearfix">
-                            <p>زبان های اروپایی اعضای یک خانواده هستند. وجود جداگانه آنها یک افسانه است. برای علم،
-                                موسیقی، ورزش و غیره، اروپا از همان <a href="#">واژگان</a> استفاده می‌کند. زبان‌ها فقط در
-                                گرامر، تلفظ و رایج‌ترین کلماتشان متفاوت هستند.</p>
-
-                            <p>همه متوجه می شوند که چرا یک زبان مشترک جدید مطلوب است: می توان از پرداخت هزینه مترجمان
-                                گران قیمت خودداری کرد. برای دستیابی به این هدف،
-                                <mark>باید</mark>
-                                داشتن دستور زبان، تلفظ و کلمات رایج تر.
-                            </p>
-                            ضروری است.
-
-                            <figure class="figure">
-                                <img src="{% static 'assets/images/posts/post-lg-2.jpg' %}" class="figure-img img-fluid rounded" alt="...">
-                                <figcaption class="figure-caption text-center">یک عنوان برای تصویر بالا.</figcaption>
-                            </figure>
-
-                            <p>زبان‌ها فقط در گرامر، تلفظ و رایج‌ترین کلماتشان متفاوت هستند. همه می دانند که چرا یک زبان
-                                مشترک جدید مطلوب است.</p>
-
-                            <img src="{% static 'assets/images/posts/single-sm-1.jpg' %}" class="rounded alignleft" alt="...">
-                            <p>کسی می تواند از پرداخت پول به مترجمان گران قیمت خودداری کند. برای رسیدن به این هدف، لازم
-                                است دستور زبان، تلفظ و کلمات رایج تری داشته باشید.</p>
-
-                            <p>اگر چندین زبان ادغام شوند، دستور زبان زبان حاصل ساده تر و منظم تر از زبان های مختلف است.
-                                زبان مشترک جدید ساده‌تر و منظم‌تر از <a href="#">زبان‌های اروپایی</a> موجود خواهد بود.
-                                به همین سادگی خواهد بود. در واقع، غربی خواهد بود.</p>
-
-                            <p>مجموعه‌ای از نمونه‌های نساجی روی میز پهن شده بودند - سامسا فروشنده دوره‌ای بود - و بالای
-                                آن عکسی آویزان بود که او به‌طور متوالی از یک مجله مصور جدا کرده بود و در یک قاب طلایی و
-                                زیبا قرار داده بود.</p>
-
-                            <h4>من باید قادر به کشیدن یک ضربه نباشم</h4>
-
-                            <ul>
-                                <li>اگر کمی بخوابم چطور</li>
-                                <li>مجموعه ای از نمونه های نساجی پهن شده است</li>
-                                <li>پاهای زیاد او در مقایسه با</li>
-                                بسیار لاغر است
-                                <li>روی کمر زره مانندش دراز کشید</li>
-                                <li> گرگور سامسا از رویاهای آشفته بیدار شد</li>
-                            </ul>
-
-                            <p>برای یک فرد انگلیسی، به نظر می رسد <a href="#">انگلیسی</a> ساده شده باشد، همانطور که یکی
-                                از دوستان شکاکم در کمبریج به من گفت Occidental چیست. زبان های اروپایی اعضای یک خانواده
-                                هستند. وجود جداگانه آنها یک افسانه است. برای علم، موسیقی، ورزش و غیره، اروپا از همین
-                                واژگان استفاده می کند.</p></div>
-                        <!-- post bottom section -->
-                        <div class="post-bottom">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-md-6 col-12 text-center text-md-start">
-                                    <!-- tags -->
-                                    <a href="#" class="tag">#پرطرفدار</a>
-                                    <a href="#" class="tag">#فیلم</a>
-                                    <a href="#" class="tag">#ویژه</a>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <!-- social icons -->
-                                    <ul class="social-icons list-unstyled list-inline mb-0 float-md-end">
-                                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a>
-                                        </li>
-                                        <li class="list-inline-item"><a href="#"><i
-                                                class="fab fa-telegram-plane"></i></a></li>
-                                        <li class="list-inline-item"><a href="#"><i class="far fa-envelope"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
+                            <p> {{ blog.body | safe }} </p>
+                        
                     </div>
 
                     <div class="spacer" data-height="50"></div>
-
-                    <div class="about-author padding-30 rounded">
-                        <div class="thumb">
-                            <img src="{% static 'assets/images/other/avatar-about.png' %}" alt="کاتن"/>
-                        </div>
-                        <div class="details">
-                            <h4 class="name"><a href="#">کاتن</a></h4>
-                            <p>سلام، من یک نویسنده محتوا هستم که مجذوب مطالب مد روز، سلبریتی و سبک زندگی هستم. او به
-                                مشتریان کمک می کند تا محتوای مناسب را برای افراد مناسب بیاورند.</p>
-                            <!-- social icons -->
-                            <ul class="social-icons list-unstyled list-inline mb-0">
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
 
                     <div class="spacer" data-height="50"></div>
 
                     <!-- section header -->
                     <div class="section-header">
-                        <h3 class="section-title">نظر (3)</h3>
+                        <h3 class="section-title">نظر ({{ comments.count }})</h3>
                         <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
                     </div>
                     <!-- post comments -->
                     <div class="comments bordered padding-30 rounded">
-
+                            
                         <ul class="comments">
                             <!-- comment item -->
+                            {% for comment in comments %}
                             <li class="comment rounded">
-                                <div class="thumb">
-                                    <img src="{% static 'assets/images/other/comment-1.png' %}" alt="John Doe"/>
+                                <div class="thumb"> 
+                                <img style="width: 30%;" src="{% static 'assets/images/other/profile.jpg' %}" alt="">
                                 </div>
                                 <div class="details">
-                                    <h4 class="name"><a href="#">جان دو</a></h4>
-                                    <span class="date">01 خرداد 1401 - 14:45</span>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
-                                    <a href="#" class="btn btn-default btn-sm">پاسخ</a>
+                                    <h4 class="name"><a href="#">{{ comment.name }}</a></h4>
+                                    <span class="date">{{ comment.date | to_jalali }} </span>
+                                    <p> {{ comment.body }} </p>
                                 </div>
                             </li>
-                            <!-- comment item -->
-                            <li class="comment child rounded">
-                                <div class="thumb">
-                                    <img src="{% static 'assets/images/other/comment-2.png' %}" alt="John Doe"/>
-                                </div>
-                                <div class="details">
-                                    <h4 class="name"><a href="#">هلن دو</a></h4>
-                                    <span class="date">01 خرداد 1401 - 14:45</span>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد</p>
-                                    <a href="#" class="btn btn-default btn-sm">پاسخ</a>
-                                </div>
-                            </li>
-                            <!-- comment item -->
-                            <li class="comment rounded">
-                                <div class="thumb">
-                                    <img src="{% static 'assetsimages/other/comment-3.png' %}" alt="John Doe"/>
-                                </div>
-                                <div class="details">
-                                    <h4 class="name"><a href="#">آنا دو</a></h4>
-                                    <span class="date">01 خرداد 1401 - 14:45</span>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد</p>
-                                    <a href="#" class="btn btn-default btn-sm">پاسخ</a>
-                                </div>
-                            </li>
+                            
+                                {% for reply in comment.recomment.all %}
+                                <li class="comment child rounded">
+                                    <div class="thumb">
+                                        <img style="width: 30%;" src="{% static 'assets/images/other/profile.jpg' %}" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <h4 class="name"><a href="#">مدیر وب سایت</a></h4>
+                                        <span class="date">{{ reply.dateTime }}</span>
+                                        <p> {{ reply.replyText }} </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            {% endfor %}
+
                         </ul>
                     </div>
 
@@ -209,24 +105,7 @@
                                     </div>
                                 </div>
 
-                                <div class="column col-md-6">
-                                    <!-- Email input -->
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" id="InputEmail" name="InputEmail"
-                                               placeholder="ایمیل خود را بنویسید" required="required">
-                                    </div>
-                                </div>
-
-                                <div class="column col-md-6">
-                                    <!-- Name input -->
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="InputWeb" id="InputWeb"
-                                               placeholder="وبسایت خود را وارد کنید" required="required">
-                                    </div>
-                                </div>
-
                                 <div class="column col-md-12">
-                                    <!-- Email input -->
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="InputName" name="InputName"
                                                placeholder="نام خود را بنویسید" required="required">
@@ -242,230 +121,6 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="col-lg-4">
-
-                    <!-- sidebar -->
-                    <div class="sidebar">
-                        <!-- widget about -->
-                        <div class="widget rounded">
-                            <div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
-                                <img src="{% static 'assets/images/logo.svg' %}" alt="logo" class="mb-4"/>
-                                <p class="mb-4">سلام، ما نویسنده محتوا هستیم که مجذوب مطالب مد روز، سلبریتی و سبک زندگی
-                                    هستیم. ما به مشتریان کمک می کنیم محتوای مناسب را برای افراد مناسب ارائه دهند.</p>
-                                <ul class="social-icons list-unstyled list-inline mb-0">
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
-                                    <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- widget مطالب محبوب -->
-                        <div class="widget rounded">
-                            <div class="widget-header text-center">
-                                <h3 class="widget-title">مطالب محبوب</h3>
-                                <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
-                            </div>
-                            <div class="widget-content">
-                                <!-- post -->
-                                <div class="post post-list-sm circle">
-                                    <div class="thumb circle">
-                                        <span class="number">1</span>
-                                        <a href="blog-single.html">
-                                            <div class="inner">
-                                                <img src="{% static 'assets/images/posts/tabs-1.jpg' %}" alt="post-title"/>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="details clearfix">
-                                        <h6 class="post-title my-0"><a href="blog-single.html">3 راه آسان برای سریعتر
-                                            کردن آیفون</a></h6>
-                                        <ul class="meta list-inline mt-1 mb-0">
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- post -->
-                                <div class="post post-list-sm circle">
-                                    <div class="thumb circle">
-                                        <span class="number">2</span>
-                                        <a href="blog-single.html">
-                                            <div class="inner">
-                                                <img src="{% static 'assets/images/posts/tabs-2.jpg' %}" alt="post-title"/>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="details clearfix">
-                                        <h6 class="post-title my-0"><a href="blog-single.html">یک روش فوق العاده آسان که
-                                            برای همه کار می کند</a></h6>
-                                        <ul class="meta list-inline mt-1 mb-0">
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- post -->
-                                <div class="post post-list-sm circle">
-                                    <div class="thumb circle">
-                                        <span class="number">3</span>
-                                        <a href="blog-single.html">
-                                            <div class="inner">
-                                                <img src="{% static 'assets/images/posts/tabs-3.jpg' %}" alt="post-title"/>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="details clearfix">
-                                        <h6 class="post-title my-0"><a href="blog-single.html">10 راه برای شروع فوری
-                                            فروش مبلمان</a></h6>
-                                        <ul class="meta list-inline mt-1 mb-0">
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- widget categories -->
-                        <div class="widget rounded">
-                            <div class="widget-header text-center">
-                                <h3 class="widget-title">کاوش موضوعات</h3>
-                                <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
-                            </div>
-                            <div class="widget-content">
-                                <ul class="list">
-                                    <li><a href="#">سبک زندگی</a><span>(5)</span></li>
-                                    <li><a href="#">الهام بخش</a><span>(2)</span></li>
-                                    <li><a href="#">مد روز</a><span>(4)</span></li>
-                                    <li><a href="#">سیاست</a><span>(1)</span></li>
-                                    <li><a href="#">پرطرفدار</a><span>(7)</span></li>
-                                    <li><a href="#">فرهنگ</a><span>(3)</span></li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <!-- widget newsletter -->
-                        <div class="widget rounded">
-                            <div class="widget-header text-center">
-                                <h3 class="widget-title">خبرنامه</h3>
-                                <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
-                            </div>
-                            <div class="widget-content">
-                                <span class="newsletter-headline text-center mb-3">به 70,000 مشترک ما بپیوندید!</span>
-                                <form>
-                                    <div class="mb-2">
-                                        <input class="form-control w-100 text-center"
-                                               placeholder="ایمیل خود را بنویسید ..." type="email">
-                                    </div>
-                                    <button class="btn btn-default btn-full" type="submit">ثبت نام</button>
-                                </form>
-                                <span class="newsletter-privacy text-center mt-3">با ثبت نام، با <a href="#">سیاست حفظ حریم خصوصی ما</a> موافقت می کنید</span>
-                            </div>
-                        </div>
-
-                        <!-- widget post carousel -->
-                        <div class="widget rounded">
-                            <div class="widget-header text-center">
-                                <h3 class="widget-title">جشن</h3>
-                                <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
-                            </div>
-                            <div class="widget-content">
-                                <div class="post-carousel-widget">
-                                    <!-- post -->
-                                    <div class="post post-carousel">
-                                        <div class="thumb rounded">
-                                            <a href="category.html" class="category-badge position-absolute">چگونه</a>
-                                            <a href="blog-single.html">
-                                                <div class="inner">
-                                                    <img src="{% static 'assets/images/widgets/widget-carousel-1.jpg' %}" alt="post-title"/>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 راه آسان که می
-                                            توانید آینده را به موفقیت تبدیل کنید</a></h5>
-                                        <ul class="meta list-inline mt-2 mb-0">
-                                            <li class="list-inline-item"><a href="#">کاتن</a></li>
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                    <!-- post -->
-                                    <div class="post post-carousel">
-                                        <div class="thumb rounded">
-                                            <a href="category.html"
-                                               class="category-badge position-absolute">پرطرفدار</a>
-                                            <a href="blog-single.html">
-                                                <div class="inner">
-                                                    <img src="{% static 'assets/images/widgets/widget-carousel-2.jpg' %}" alt="post-title"/>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">با این 7 نکته بر هنر
-                                            طبیعت مسلط شوید</a></h5>
-                                        <ul class="meta list-inline mt-2 mb-0">
-                                            <li class="list-inline-item"><a href="#">کاتن</a></li>
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                    <!-- post -->
-                                    <div class="post post-carousel">
-                                        <div class="thumb rounded">
-                                            <a href="category.html" class="category-badge position-absolute">چگونه</a>
-                                            <a href="blog-single.html">
-                                                <div class="inner">
-                                                    <img src="{% static 'assets/images/widgets/widget-carousel-1.jpg' %}" alt="post-title"/>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <h5 class="post-title mb-0 mt-4"><a href="blog-single.html">5 راه آسان که می
-                                            توانید آینده را به موفقیت تبدیل کنید</a></h5>
-                                        <ul class="meta list-inline mt-2 mb-0">
-                                            <li class="list-inline-item"><a href="#">کاتن</a></li>
-                                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- carousel arrows -->
-                                <div class="slick-arrows-bot">
-                                    <button type="button" data-role="none"
-                                            class="carousel-botNav-prev slick-custom-buttons" aria-label="بعدی"><i
-                                            class="icon-arrow-right"></i></button>
-                                    <button type="button" data-role="none"
-                                            class="carousel-botNav-next slick-custom-buttons" aria-label="قبلی"><i
-                                            class="icon-arrow-left"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- widget advertisement -->
-                        <div class="widget no-container rounded text-md-center">
-                            <span class="ads-title">- تبلیغات -</span>
-                            <a href="#" class="widget-ads">
-                                <img src="{% static 'assets/images/ads/ad-360.png' %}" alt="Advertisement"/>
-                            </a>
-                        </div>
-
-                        <!-- widget tags -->
-                        <div class="widget rounded">
-                            <div class="widget-header text-center">
-                                <h3 class="widget-title">برچسب ها</h3>
-                                <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
-                            </div>
-                            <div class="widget-content">
-                                <a href="#" class="tag">#پرطرفدار</a>
-                                <a href="#" class="tag">#فیلم</a>
-                                <a href="#" class="tag">#ویژه</a>
-                                <a href="#" class="tag">#گالری</a>
-                                <a href="#" class="tag">#سلبریتی</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
 
         </div>

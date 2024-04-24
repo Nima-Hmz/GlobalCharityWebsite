@@ -57,7 +57,7 @@
 							<span class="post-format">
 								<i class="icon-picture"></i>
 							</span>
-							<a href="{% url 'home:index' %}">
+							<a href="{% url 'article:blog_detail' blog.slug %}">
 								<div class="inner">
 									<img src="{{ blog.image.url }}" alt="post-title" />
 								</div>
@@ -68,7 +68,7 @@
 								<li class="list-inline-item"> در تاریخ {{ blog.updated | to_jalali:'%y/%m/%d' }}</li>
 								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
 							</ul>
-							<h5 class="post-title mb-3 mt-3"><a href="blog-single.html">{{ blog.title }}</a></h5>
+							<h5 class="post-title mb-3 mt-3"><a href="{% url 'article:blog_detail' blog.slug %}">{{ blog.title }}</a></h5>
 							<p class="excerpt mb-0">{{ blog.body | safe | truncatewords:30 }}</p>
 						</div>
 						<div class="post-bottom clearfix d-flex align-items-center">
@@ -77,10 +77,10 @@
 								
 							</div>
 							<div class="float-end d-none d-md-block">
-								<a href="blog-single.html" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
+								<a href="{% url 'article:blog_detail' blog.slug %}" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
 							</div>
 							<div class="more-button d-block d-md-none float-end">
-								<a href="blog-single.html"><span class="icon-options"></span></a>
+								<a href="{% url 'article:blog_detail' blog.slug %}"><span class="icon-options"></span></a>
 							</div>
 						</div>
 					</div>
