@@ -3,44 +3,216 @@
 {% load jalali_tags %}
 {% block content %}
 
-    <section class="hero-carousel">
-        <div class="container-xl">
-            <div class="post-carousel-lg">
-                <!-- post -->
-                <div class="post featured-post-xl">
-                    <div class="details clearfix">
-                        <a href="category.html" class="category-badge lg">سبک زندگی</a>
-                        <h4 class="post-title"><a href="blog-single.html">9 مورد از شگفت انگیزترین دریاچه آبی با کوه برفی</a></h4>
-                        <ul class="meta list-inline mb-0">
-                            <li class="list-inline-item"><a href="#">کاتن</a></li>
-                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                        </ul>
-                    </div>
-                    <a href="blog-single.html">
-                        <div class="thumb rounded">
-                            <div class="inner data-bg-image" data-bg-image="{% static 'assets/images/posts/featured-xl-1.jpg' %}"></div>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="post featured-post-xl">
-                    <div class="details clearfix">
-                        <a href="category.html" class="category-badge lg">فرهنگ</a>
-                        <h4 class="post-title"><a href="blog-single.html">نکته مهمی که باید در مورد شنا بدانید</a></h4>
-                        <ul class="meta list-inline mb-0">
-                            <li class="list-inline-item"><a href="#">کاتن</a></li>
-                            <li class="list-inline-item">30 اردیبهشت 1401</li>
-                        </ul>
-                    </div>
-                    <a href="blog-single.html">
-                        <div class="thumb rounded">
-                            <div class="inner data-bg-image" data-bg-image="{% static 'assets/images/posts/featured-xl-2.jpg' %}"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+	<div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+		<div class="container-xl">
+			<div class="table-responsive">
+				<table class="table table-hover border border-5">
+					<!-- <thead class="thead-light">
+						<tr>
+						<th scope="col"></th>
+						<th scope="col">1</th>
+						<th scope="col">2</th>
+						<th scope="col">3</th>
+						<th scope="col">4</th>
+						<th scope="col">5</th>
+						<th scope="col">6</th>
+						<th scope="col">7</th>
+						<th scope="col">8</th>
+						<th scope="col">9</th>
+						<th scope="col">10</th>
+						</tr>
+					</thead> -->
+					<tbody>
+						<tr>
+							<td colspan = '1' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									1%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">مقدار کمک به خیریه</h5>
+											<p>در این قسمت میتوان  نام کمک کننده، و اطلاعات دیگر نمایش داد</p>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									2%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									3%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									4%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									5%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>	
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									6%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									7%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									8%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									9%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									10%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									11%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									12%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td colspan = '1' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									13%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									14%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-danger text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									15%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+							<td colspan = '8' class="bg-success text-white text-center">
+								<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+									16%
+									<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+										<div class="offcanvas-title">
+											<h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+											<!-- <div class="time">5 hr</div> -->
+										</div>
+									</div>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 
 	<!-- section main content -->
 	<section class="main-content">
