@@ -36,10 +36,14 @@ class IndexView(View):
 # About Us View
 class AboutView(View):
     def get(self, request):
-        return render(request, 'home/about.html')
+        lovely_blogs = blogModel.objects.filter(status=True , lovely = True).order_by('-updated')[:3]
+
+        return render(request, 'home/about.html' , {'Lblogs' : lovely_blogs,})
     
     def post(self, request):
-        return render(request, 'home/about.html')
+        lovely_blogs = blogModel.objects.filter(status=True , lovely = True).order_by('-updated')[:3]
+
+        return render(request, 'home/about.html' , {'Lblogs' : lovely_blogs,})
     
 
 # Contact Us View
