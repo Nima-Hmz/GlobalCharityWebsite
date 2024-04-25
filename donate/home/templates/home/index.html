@@ -222,13 +222,12 @@
 							</div>
 							<div class="widget-content">
 								<span class="newsletter-headline text-center mb-3">به 70,000 مشترک ما بپیوندید!</span>
-								<form>
+								<form method="post" , action="{% url 'home:add_member' %}">
 									<div class="mb-2">
-										<input class="form-control w-100 text-center" placeholder="ایمیل خود را بنویسید ..." type="email">
+										<input name="email-field" class="form-control w-100 text-center" placeholder="ایمیل خود را بنویسید ..." type="email" required>
 									</div>
 									<button class="btn btn-default btn-full" type="submit">ثبت نام</button>
 								</form>
-								<span class="newsletter-privacy text-center mt-3">با ثبت نام، با <a href="#">سیاست حفظ حریم خصوصی ما</a> موافقت می کنید</span>
 							</div>
 						</div>
 

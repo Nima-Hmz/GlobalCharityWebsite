@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 from accounts.models import User
 from django.db.models import Sum
 
+from newsletters.models import *
+
 # Index View
 class IndexView(View):
     def get(self, request):
@@ -121,5 +123,20 @@ class ContactUsView(View):
             messages.error(request , 'پر کردن فیلد ها اجباری است' , 'danger')
             return redirect('home:contact_us')
         
+class NewslettersView(View):
+    def post(self , request):
+        email = request.POST['email-field']
 
+        member = NewsletterEmailsModel.objects.filter(email=email)
+
+        if email:
+            if member.exists():
+                messages.error(request , 'این ایمیل قبلا ثبت شده است' , 'danger')
+            else:
+                new_member = NewsletterEmailsModel(email=email)
+                new_member.save()
+
+                messages.success(request , 'انجام شد' , 'success')
+
+        return redirect('home:index')
 
