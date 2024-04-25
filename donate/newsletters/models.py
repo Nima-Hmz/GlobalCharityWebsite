@@ -13,6 +13,7 @@ class NewsletterEmailsModel(models.Model):
 
     class Meta:
         verbose_name_plural = 'ایمیل های خبرنامه'
+        verbose_name = 'ایمیلی'
 
 class NewsletterMessageModel(models.Model):
     subject = models.CharField(max_length=100 , verbose_name='موضوع')
@@ -23,6 +24,7 @@ class NewsletterMessageModel(models.Model):
 
     class Meta:
         verbose_name_plural = 'خبر جدید'
+        verbose_name = 'خبری'
     
     def save_model(self, request, obj, form, change):
         subject = obj.subject

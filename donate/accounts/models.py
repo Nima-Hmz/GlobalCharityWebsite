@@ -28,6 +28,10 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+    
+    class Meta:
+        verbose_name_plural = 'کاربران'
+        verbose_name = 'کاربری'
         
 
 class OtpCodeModel(models.Model):
@@ -37,3 +41,7 @@ class OtpCodeModel(models.Model):
 
     def __str__(self):
         return f'{self.phone_number} - {self.otp} - {self.created}'
+    
+    class Meta:
+        verbose_name_plural = 'کد های تایید'
+        verbose_name = 'کد تاییدی'

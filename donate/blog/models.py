@@ -15,7 +15,7 @@ class blogModel(models.Model):
 
     class Meta:
         ordering = ("-updated",)
-        verbose_name = "وبلاگ"
+        verbose_name = "وبلاگی"
         verbose_name_plural = "بلاگ ها"
 
     def __str__(self):
@@ -37,6 +37,7 @@ class commentModel(models.Model):
     
     class Meta:
         verbose_name_plural = 'نظرات'
+        verbose_name = 'نظری'
 
 
 class ReplyComment(models.Model):
@@ -50,3 +51,4 @@ class ReplyComment(models.Model):
     
     class Meta:
         verbose_name_plural = 'پاسخ ها'
+        verbose_name = 'پاسخی'

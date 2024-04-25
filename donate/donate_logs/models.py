@@ -15,3 +15,5 @@ class DonateLog(models.Model):
 
     class Meta:
         ordering = ('-date',)
+        verbose_name_plural = 'اطلاعات'
+        verbose_name = 'اطلاعاتی'
