@@ -27,3 +27,4 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['recomment']
     #readonly_fields = ['blog' , 'user' , 'name' ,'date']
 
+

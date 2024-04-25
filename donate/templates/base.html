@@ -118,7 +118,7 @@
 								<button class="search icon-button">
 									<i class="icon-magnifier"></i>
 								</button>
-								<button class="burger-menu icon-button ms-2 float-end float-lg-none">
+								<button class="burger-menu icon-button ms-2 float-end float-lg-none d-lg-none ">
 									<span class="burger-icon"></span>
 								</button>
 							</div>
@@ -235,32 +235,33 @@
 	<!-- close button -->
 	<button type="button" class="btn-close" aria-label="Close"></button>
 
-	<!-- logo -->
-	<div class="logo">
-		<img src="{% static 'assets/images/logo.svg' %}" alt="Katen" />
-	</div>
-
 	<!-- menu -->
 	<nav>
 		<ul class="vertical-menu">
 			<li class="active">
 				<a href="{% url 'home:index' %}">صفحه اصلی</a>
-				<!-- <ul class="submenu">
-					<li><a href="index.html">صفحه اصلی 1</a></li>
-					<li><a href="index-2.html">صفحه اصلی 2</a></li>
-					<li><a href="index-3.html">صفحه اصلی 3</a></li>
-					<li><a href="index-4.html">صفحه اصلی 4</a></li>
-					<li><a href="index-5.html">صفحه اصلی 5</a></li>
-				</ul> -->
+				
 			</li>
 
 			<li>
 				<a href="#">صفحات</a>
 				<ul class="submenu">
-					<li><a href="category.html">دسته بندی</a></li>
-					<li><a href="blog-single.html">جزییات وبلاگ 1</a></li>
-					<li><a href="blog-single-2.html">جزییات وبلاگ 2</a></li>
-
+					{% if user.is_authenticated %}
+					<li>
+						<a href="{% url 'account:user_logout' %}">خروج</a>
+					</li>
+					{% else %}
+					<li>
+						<a href="{% url 'account:user_login' %}">ورود</a>
+					</li>
+					<li>
+						<a href="{% url 'account:user_register' %}">ثبت نام</a>
+					</li>
+					{% endif %}
+					<li>
+						<a href="{% url 'donate:donate' %}">حمایت</a>
+					</li>
+					<li><a href="{% url 'stock:stock' %}">چارت آزمایشی</a></li>
 				</ul>
 			</li>
 			<li><a href="{% url 'home:contact_us' %}">تماس با ما</a></li>
