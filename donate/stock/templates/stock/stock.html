@@ -7,7 +7,7 @@
     <section class="page-header">
         <div class="container-xl">
             <div class="text-center">
-                <h1 class="mt-0 mb-2">چارت</h1>
+                <h1 class="mt-0 mb-2">چارت آزمایشی</h1>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center mb-0">
                         <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
@@ -21,33 +21,28 @@
     <!-- page content -->
     <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
       <div class="container-xl">
-        <div class="table-responsive">
+        <div class="table-responsive rounded">
           <table class="table table-hover border border-5">
             <tbody>
-              {% for row in top_users|slice:"0:4" %}
-              <tr>
-                {% for user in top_users %}
-                {% if forloop.parentloop.counter0|divisibleby:"2" %}
-                <td class="bg-success text-white text-center">
-                {% else %}
-                <td class="bg-danger text-white text-center">
-                {% endif %}
-                <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ user.id }}" aria-controls="offcanvasBottom{{ user.id }}">
-                  {{ user.full_name }}
-                  <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom{{ user.id }}" aria-labelledby="offcanvasBottomLabel{{ user.id }}">
-                    <div class="offcanvas-title">
-                      <h5 class="offcanvas-title" id="offcanvasBottomLabel{{ user.id }}">مقدار کمک به خیریه</h5>
-                      <hr>
-                      <h5>{{ user.total_donate }}</h5>
-                      <h6>{{ user.percent|floatformat:5 }}%</h6>
-                      <!-- <div class="time">5 hr</div> -->
-                    </div>
-                  </div>
-                </button>
-                </td>
-                {% endfor %}
-              </tr>
-              {% endfor %}
+              {% for user in top_users %}
+            <tr>
+              <td colspan = '8' class="{% cycle 'bg-secondary' 'bg-dark' %} text-white text-center">
+              <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
+                {{ user.full_name }}
+                <h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
+                <div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
+                <div class="offcanvas-title">
+                  <h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
+                  <hr class="text-dark">
+                  <h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
+                  <!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6> -->
+                  <!-- <div class="time">5 hr</div> -->
+                </div>
+                </div>
+              </button>
+              </td>
+            </tr>
+            {% endfor %}
             </tbody>
           </table>
         </div>
