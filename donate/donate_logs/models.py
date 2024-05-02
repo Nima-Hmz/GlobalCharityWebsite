@@ -16,6 +16,7 @@ class DonateLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="donator")
     amount = models.PositiveBigIntegerField()
     currency = models.CharField(max_length=9,choices=CURRENCY_CHOICES, default="TOMAN")
+    gold_value = models.FloatField(default=0)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
