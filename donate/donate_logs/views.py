@@ -114,11 +114,12 @@ class OrderVertifyView(LoginRequiredMixin, View):
 
                 # get the currency from user session
                 currency = user_session['currency']
+                amount = user_session['amount']
 
                 # creating log here 
                 user1 = request.user.phone_number
                 user = User.objects.get(phone_number=user1)
-                donate_log = DonateLog.objects.create(user=user, amount= user_session['amount'], currency=currency)
+                donate_log = DonateLog.objects.create(user=user, amount=amount, currency=currency)
                 donate_log.save()
 
                 # add to total_donate here
