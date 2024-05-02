@@ -18,13 +18,16 @@ class DonateView(View):
     def post(self, request):
         try: 
             amount = int(request.POST.get("amount"))
+            currency = request.POST.get("currency")
         except:
             amount = 0
+            currency = None
 
         if amount < 1000:
             messages.error(request, "مبلغ وارد شده باید بالای هزار تومان باشد", 'danger')
             return redirect('donate:donate')
-        return redirect('donate:order_pay', amount=amount)
+        
+        return redirect('donate:order_pay', amount=amount, currency=currency)
     
 
 #? sandbox merchant 
@@ -42,10 +45,17 @@ description = "توضیحات مربوط به تراکنش را در این قس
 CallbackURL = 'http://127.0.0.1:8000/donate/vertify/'
 
 class OrderPayView(LoginRequiredMixin, View):
-    def get(self, request, amount):
+    def get(self, request, amount, currency):
+
+        # make sure that currency is valid :
+        list_of_currencies = ['TOMAN', 'DOLLAR', 'EURO', 'POUND', 'IQD', 'LIRA']
+        if currency not in list_of_currencies:
+            messages.error(request, "دوباره تلاش کنید", 'danger')
+            return redirect("donate:donate")
 
         request.session["amount"] = {
-            'amount':amount
+            'amount':amount,
+            'currency':currency
         }
     
         data = {
@@ -55,6 +65,7 @@ class OrderPayView(LoginRequiredMixin, View):
             "Phone": '09398452352',
             "CallbackURL": CallbackURL,
         }
+  
         data = json.dumps(data)
         # set content length by data
         headers = {'content-type': 'application/json', 'content-length': str(len(data)) }
@@ -97,15 +108,27 @@ class OrderVertifyView(LoginRequiredMixin, View):
         if response.status_code == 200:
             response = response.json()
             if response['Status'] == 100:
+
+                # successful pay :
+                # create logs and other things here:
+
+                # get the currency from user session
+                currency = user_session['currency']
+
+                # creating log here 
                 user1 = request.user.phone_number
                 user = User.objects.get(phone_number=user1)
-                donate_log = DonateLog.objects.create(user=user, amount= user_session['amount'])
+                donate_log = DonateLog.objects.create(user=user, amount= user_session['amount'], currency=currency)
                 donate_log.save()
+
+                # add to total_donate here
                 user.total_donate += int(user_session['amount'])
                 user.save()
+
                 del request.session['amount']
                 messages.success(request, "تراکنش موفق بود", 'success')
                 return redirect("home:index")
+            
             else:
                 messages.error(request, "تراکنش ناموفق بود و یا توسط کاربر لغو شد", 'danger')
                 del request.session['amount']

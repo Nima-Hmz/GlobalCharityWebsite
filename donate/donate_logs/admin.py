@@ -7,5 +7,5 @@ from .models import DonateLog
 
 @admin.register(DonateLog)
 class DonateLogAdmin(admin.ModelAdmin):
-    list_display = ['user', 'amount' , 'date']
-    search_fields = ['amount']
+    list_display = ['user', 'currency', 'amount' , 'date']
+    search_fields = ['amount', 'currency']
