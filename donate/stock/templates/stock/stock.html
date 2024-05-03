@@ -18,37 +18,74 @@
         </div>
     </section>
 
-    <!-- page content -->
-    <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-      <div class="container-xl">
-        <div class="table-responsive rounded">
-          <table class="table table-hover border border-5">
-            <tbody>
-              {% for user in top_users %}
-            <tr>
-              <td colspan = '8' class="{% cycle 'bg-secondary' 'bg-dark' %} text-white text-center">
-              <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
-                {{ user.full_name }}
-                <h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
-                <div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
-                <div class="offcanvas-title">
-                  <h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
-                  <hr class="text-dark">
-                  <h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
-                  <!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6> -->
-                  <!-- <div class="time">5 hr</div> -->
-                </div>
-                </div>
-              </button>
-              </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <!-- Pie Chart -->
+    <h1 class="text-center">Multi Series Pie Chart</h1>
+    <div id="container" style="width: 75%;">
+    <canvas id="pie-chart"></canvas>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@latest/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <script>
+    var ctx = document.getElementById('pie-chart').getContext('2d');
+
+    // Assuming you have multiple datasets (labels and data arrays)
+    var labels1 = ['Data 1 Set 1', 'Data 2 Set 1', 'Data 3 Set 1'];
+    var data1 = [10, 20, 30];
+
+    var labels2 = ['Data 1 Set 2', 'Data 2 Set 2', 'Data 3 Set 2'];
+    var data2 = [25, 15, 40];
+
+    var pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+        labels: labels1.concat(labels2), // Combine labels for multiple series
+        datasets: [{
+            label: 'Series 1', // Optional label for the dataset
+            data: data1,
+            backgroundColor: [
+            '#ff0000',
+            '#0000ff',
+            '#45e569'
+            ],
+            borderColor: [
+            '#ff0000',
+            '#0000ff',
+            '#45e569'
+            ],
+            borderWidth: 1
+        }, {
+            label: 'Series 2', // Optional label for the dataset
+            data: data2,
+            backgroundColor: [
+            '#f1c40f',
+            '#e74c3c',
+            '#9b59b6'
+            ],
+            borderColor: [
+            '#f1c40f',
+            '#e74c3c',
+            '#9b59b6'
+            ],
+            borderWidth: 1
+        }]
+        },
+        options: {
+        responsive: true,
+        plugins: {
+            legend: {
+            position: 'top'
+            },
+            title: {
+            display: true,
+            text: 'Multi Series Pie Chart'
+            },
+            datalabels: {} // Data labels plugin
+        }
+        }
+    });
+    </script>
+
     
-
-
 {% endblock %}
