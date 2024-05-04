@@ -220,18 +220,18 @@ class OrderVertifyView(LoginRequiredMixin, View):
 
                     if toman_amount is not None:
                         gold_value = toman_amount / float(gold_price)
-                        # print(gold_value)
                     else:
                         print("toman_amount is None. Please provide a valid value.")
+                        gold_value = 0
 
                 # creating log here 
                 user1 = request.user.phone_number
                 user = User.objects.get(phone_number=user1)
-                donate_log = DonateLog.objects.create(user=user, amount=amount, currency=currency)
+                donate_log = DonateLog.objects.create(user=user, amount=amount, currency=currency, gold_value=gold_value)
                 donate_log.save()
 
                 # add to total_donate here
-                user.total_donate += int(user_session['amount'])
+                user.total_donate += gold_value
                 user.save()
 
                 del request.session['amount']

@@ -7,7 +7,7 @@ class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=11 , unique=True)
     full_name = models.CharField(max_length=124)
     display_name = models.BooleanField(default=True)
-    total_donate = models.PositiveBigIntegerField(default=0)
+    total_donate = models.FloatField(default=0)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
