@@ -23,8 +23,11 @@ class DonateView(View):
             amount = 0
             currency = None
 
-        if amount < 1000:
+        if currency in 'IRR' and amount < 1000:
             messages.error(request, "مبلغ وارد شده باید بالای هزار تومان باشد", 'danger')
+            return redirect('donate:donate')
+        elif currency in ['DOLLAR', 'EURO', 'POUND', 'IQD', 'LIRA'] and amount < 10:
+            messages.error(request, "مبلغ وارد شده پایین تر از حد مجاز است ", 'danger')
             return redirect('donate:donate')
         
         return redirect('donate:order_pay', amount=amount, currency=currency)
@@ -119,7 +122,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 if currency == 'DOLLAR':
                     # make API request to get the latest currency value
                     api_url = 'http://api.navasan.tech/latest/'
-                    api_params = {'item': 'usd', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    api_params = {'item': 'usd', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                     response = requests.get(api_url, params=api_params)
                     if response.status_code == 200:
                         usd_data = response.json()
@@ -136,7 +139,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 elif currency == 'EURO':
                     # convert Euro to Toman
                     euro_api_url = 'http://api.navasan.tech/latest/'
-                    api_params1 = {'item': 'eur', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    api_params1 = {'item': 'eur', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                     euro_response = requests.get(euro_api_url, params=api_params1)
                     if euro_response.status_code == 200:
                         euro_data = euro_response.json()
@@ -150,7 +153,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 elif currency == 'POUND':
                     # convert Pound to Toman
                     pound_api_url = 'http://api.navasan.tech/latest/'
-                    api_params2 = {'item': 'gbp', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    api_params2 = {'item': 'gbp', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                     pound_response = requests.get(pound_api_url, params=api_params2)
                     if pound_response.status_code == 200:
                         pound_data = pound_response.json()
@@ -165,7 +168,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 elif currency == 'IQD':
                     # convert IQD to Toman
                     iqd_api_url = 'http://api.navasan.tech/latest/'
-                    api_params3 = {'item': 'iqd', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    api_params3 = {'item': 'iqd', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                     iqd_response = requests.get(iqd_api_url, params=api_params3)
                     if iqd_response.status_code == 200:
                         iqd_data = iqd_response.json()
@@ -179,12 +182,14 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 elif currency == 'LIRA':
                     # convert LIRA to Toman
                     lira_api_url = 'http://api.navasan.tech/latest/'
-                    api_params4 = {'item': 'try', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    api_params4 = {'item': 'try', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                     lira_response = requests.get(lira_api_url, params=api_params4)
                     if lira_response.status_code == 200:
                         lira_data = lira_response.json()
+                        # print(lira_data)
                         """ Get the exchnage rate from Euro to Toman """
                         lira_to_toman_rate  = lira_data['try']['value']
+                        # print(lira_to_toman_rate)
                         """ Convert Euro to Toman (amount = amoun that user donate) """
                         toman_amount = amount * float(lira_to_toman_rate) / 1000
                         # print(toman_amount)
@@ -201,7 +206,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         irr_rate = irr_data['conversion_rates']['IRR']
                         """ convert IRR to Toman """
                         toman_amount = (amount * float(irr_rate)) / 10
-                        print(toman_amount)
+                        # print(toman_amount)
                     else:
                         toman_amount = None
                 else:
@@ -210,7 +215,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
 
                 """ make API request to get the latest gold price """
                 gold_api_url = 'http://api.navasan.tech/latest/'  # example API URL
-                api_params_gold = {'item': '18ayar', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                api_params_gold = {'item': '18ayar', 'api_key': 'freeOQ1fPbg3WUWQHHA4qYCeeI0J0aGh'}
                 gold_response = requests.get(gold_api_url, params=api_params_gold)
                 if gold_response.status_code == 200:
                     gold_data = gold_response.json()
@@ -220,9 +225,10 @@ class OrderVertifyView(LoginRequiredMixin, View):
 
                     if toman_amount is not None:
                         gold_value = toman_amount / float(gold_price)
+                        # print(gold_value)
                     else:
                         print("toman_amount is None. Please provide a valid value.")
-                        gold_value = 0
+                        # gold_value = 0
 
                 # creating log here 
                 user1 = request.user.phone_number
