@@ -116,97 +116,111 @@ class OrderVertifyView(LoginRequiredMixin, View):
                 currency = user_session['currency']
                 amount = user_session['amount']
 
-                # make API request to get the latest currency value
-                api_url = 'http://api.navasan.tech/latest/'
-                api_params = {'item': 'usd', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
-                response = requests.get(api_url, params=api_params)
-                if response.status_code == 200:
-                    data = response.json()
-                    usd_sell_rate = data['usd']  # assume this is the key for the USD sell rate
-                    toman_per_usd = 1 / float(usd_sell_rate['value'])  # calculate Toman per USD
-
-
-                # make API request to get the latest IRR price
-                irr_api_url = 'https://v6.exchangerate-api.com/v6/latest/'  # example API URL
-                api_params_irr = {'item': 'IRR', 'api_key': 'ab4a053319e602a65782e75e'}
-                irr_response = requests.get(irr_api_url, params=api_params_irr)
-
-                if irr_response.status_code == 200:
-                    irr_data = irr_response.json()
-                    print(irr_data)
-                    irr_rate = irr_data['IRR']['value']  # assume this is the key for the IRR rate
-
-                    # convert IRR to Toman
-                    toman_amount = amount * float(irr_rate) / 10
-
-                else:
-                    toman_amount = None
-
-                # convert currency amount to Toman
                 if currency == 'DOLLAR':
-                    toman_amount = amount * toman_per_usd
+                    # make API request to get the latest currency value
+                    api_url = 'http://api.navasan.tech/latest/'
+                    api_params = {'item': 'usd', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
+                    response = requests.get(api_url, params=api_params)
+                    if response.status_code == 200:
+                        usd_data = response.json()
+                        """ assume this is the key for the USD sell rate """
+                        usd_to_toman_rate = usd_data['usd']['value']
+                        # print(usd_to_toman_rate)
+                        # toman_per_usd = 1 / float(usd_sell_rate)  # calculate Toman per USD
+                        # print(toman_per_usd)
+                        """ convert currency amount to Toman """
+                        toman_amount = amount * float(usd_to_toman_rate) / 1000 
+                        # print(toman_amount)
+                    else:
+                        toman_amount = None
                 elif currency == 'EURO':
                     # convert Euro to Toman
                     euro_api_url = 'http://api.navasan.tech/latest/'
-                    api_params1 = {'item': 'eur', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
+                    api_params1 = {'item': 'eur', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
                     euro_response = requests.get(euro_api_url, params=api_params1)
                     if euro_response.status_code == 200:
                         euro_data = euro_response.json()
-                        euro_to_toman_rate = euro_data['eur']['value']  
-                        toman_amount = amount * float(euro_to_toman_rate) / 10
+                        """ Get the exchnage rate from Euro to Toman """
+                        euro_to_toman_rate = euro_data['eur']['value']
+                        """ Convert Euro to Toman (amount = amoun that user donate) """   
+                        toman_amount = amount * float(euro_to_toman_rate) / 1000
+                        # print(toman_amount)
                     else:
                         toman_amount = None
                 elif currency == 'POUND':
                     # convert Pound to Toman
                     pound_api_url = 'http://api.navasan.tech/latest/'
-                    api_params2 = {'item': 'gbp', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
+                    api_params2 = {'item': 'gbp', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
                     pound_response = requests.get(pound_api_url, params=api_params2)
                     if pound_response.status_code == 200:
                         pound_data = pound_response.json()
-                        print(pound_data)
-                        pound_to_toman_rate = pound_data['gbp']['value']  
-                        toman_amount = amount * float(pound_to_toman_rate) / 10  
+                        # print(pound_data)
+                        """ Get the exchnage rate from Pound to Toman """
+                        pound_to_toman_rate = pound_data['gbp']['value']
+                        """ Convert Pound to Toman (amount = amoun that user donate) """  
+                        toman_amount = amount * float(pound_to_toman_rate) / 1000
+                        # print(toman_amount)  
                     else:
                         toman_amount = None
                 elif currency == 'IQD':
                     # convert IQD to Toman
                     iqd_api_url = 'http://api.navasan.tech/latest/'
-                    api_params3 = {'item': 'iqd', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
+                    api_params3 = {'item': 'iqd', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
                     iqd_response = requests.get(iqd_api_url, params=api_params3)
                     if iqd_response.status_code == 200:
                         iqd_data = iqd_response.json()
-                        iqd_to_toman_rate = iqd_data['iqd']['value']  
-                        toman_amount = amount * float(iqd_to_toman_rate) / 10  
+                        """ Get the exchnage rate from IQD to Toman """
+                        iqd_to_toman_rate = iqd_data['iqd']['value']
+                        """ Convert IQD to Toman (amount = amoun that user donate) """
+                        toman_amount = amount * float(iqd_to_toman_rate) / 1000
+                        # print(toman_amount)
                     else:
                         toman_amount = None
                 elif currency == 'LIRA':
                     # convert LIRA to Toman
                     lira_api_url = 'http://api.navasan.tech/latest/'
-                    api_params4 = {'item': 'try', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
+                    api_params4 = {'item': 'try', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
                     lira_response = requests.get(lira_api_url, params=api_params4)
                     if lira_response.status_code == 200:
                         lira_data = lira_response.json()
-                        lira_to_toman_rate  = lira_data['try']['value'] 
-                        toman_amount = amount * float(lira_to_toman_rate) / 10
-                        print(toman_amount) 
+                        """ Get the exchnage rate from Euro to Toman """
+                        lira_to_toman_rate  = lira_data['try']['value']
+                        """ Convert Euro to Toman (amount = amoun that user donate) """
+                        toman_amount = amount * float(lira_to_toman_rate) / 1000
+                        # print(toman_amount)
+                    else:
+                        toman_amount = None
+                
+                elif currency == 'IRR':
+                    # make API request to get the latest IRR price
+                    irr_api_url = 'https://v6.exchangerate-api.com/v6/ab4a053319e602a65782e75e/latest/IRR'  # example API URL
+                    irr_response = requests.get(irr_api_url)
+                    if irr_response.status_code == 200:
+                        irr_data = irr_response.json()
+                        """ assume this is the key for the IRR rate """
+                        irr_rate = irr_data['conversion_rates']['IRR']
+                        """ convert IRR to Toman """
+                        toman_amount = (amount * float(irr_rate)) / 10
+                        print(toman_amount)
                     else:
                         toman_amount = None
                 else:
-                    # handle other currencies or unknown currencies
+                    """ handle other currencies or unknown currencies """
                     toman_amount = None
 
-                # make API request to get the latest gold price
+                """ make API request to get the latest gold price """
                 gold_api_url = 'http://api.navasan.tech/latest/'  # example API URL
-                api_params_gold = {'item': '18ayar', 'api_key': 'freeBqXyEcWjvEoGrGw8FkkrHkT9jkPe'}
+                api_params_gold = {'item': '18ayar', 'api_key': 'freeo7UvASyFBUGDuvsiZhwi3Mue3PyT'}
                 gold_response = requests.get(gold_api_url, params=api_params_gold)
                 if gold_response.status_code == 200:
                     gold_data = gold_response.json()
-                    print(gold_data)
-                    gold_price = gold_data['18ayar']['value']  # assume this is the key for the gold price
+                    # print(gold_data)
+                    """ assume this is the key for the gold price """
+                    gold_price = gold_data['18ayar']['value']
 
                     if toman_amount is not None:
                         gold_value = toman_amount / float(gold_price)
-                        print(gold_value)
+                        # print(gold_value)
                     else:
                         print("toman_amount is None. Please provide a valid value.")
 
