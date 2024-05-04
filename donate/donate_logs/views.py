@@ -48,7 +48,7 @@ class OrderPayView(LoginRequiredMixin, View):
     def get(self, request, amount, currency):
 
         # make sure that currency is valid :
-        list_of_currencies = ['TOMAN', 'DOLLAR', 'EURO', 'POUND', 'IQD', 'LIRA']
+        list_of_currencies = ['IRR', 'DOLLAR', 'EURO', 'POUND', 'IQD', 'LIRA']
         if currency not in list_of_currencies:
             messages.error(request, "دوباره تلاش کنید", 'danger')
             return redirect("donate:donate")

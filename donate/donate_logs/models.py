@@ -6,7 +6,7 @@ from accounts.models import User
 
 class DonateLog(models.Model):
     CURRENCY_CHOICES = (
-    ("TOMAN", "toman"),
+    ("IRR", "irr"),
     ("DOLLAR", "dollar"),
     ("EURO", "euro"),
     ("POUND", "pound"),
@@ -15,7 +15,7 @@ class DonateLog(models.Model):
 )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="donator")
     amount = models.PositiveBigIntegerField()
-    currency = models.CharField(max_length=9,choices=CURRENCY_CHOICES, default="TOMAN")
+    currency = models.CharField(max_length=9,choices=CURRENCY_CHOICES, default="IRR")
     gold_value = models.FloatField(default=0)
     date = models.DateTimeField(auto_now_add=True)
 
