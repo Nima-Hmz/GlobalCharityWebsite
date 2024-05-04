@@ -18,92 +18,83 @@
 	</section>
 
 	<!-- page content -->
-    <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-		<div class="container-xl">
-		  	<div class="table-responsive rounded">
-				<table class="table table-hover border border-5">
-					<tbody>
-					<tr>
-						{% for user in top_users1 %}
-						<td colspan = '8' class="{% cycle 'bg-dark' 'bg-success' %} text-white text-center">
-						<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
-						{{ user.full_name }}
-						<h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
-						<div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
-						<div class="offcanvas-title">
-							<h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
-							<hr class="text-dark">
-							<h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
-							<!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6> -->
-							<!-- <div class="time">5 hr</div> -->
-						</div>
-						</div>
-						</button>
-						</td>
-						{% endfor %}
-					</tr>
-					<tr>
-						{% for user in top_users2 %}
-						<td colspan = '8' class="{% cycle 'bg-success' 'bg-dark' %} text-white text-center">
-						<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
-						{{ user.full_name }}
-						<h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
-						<div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
-						<div class="offcanvas-title">
-							<h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
-							<hr class="text-dark">
-							<h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
-							<!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6> -->
-							<!-- <div class="time">5 hr</div> -->
-						</div>
-						</div>
-						</button>
-						</td>
-						{% endfor %}
-					</tr>
-					<tr>
-						{% for user in top_users3 %}
-						<td colspan = '8' class="{% cycle 'bg-dark' 'bg-success' %} text-white text-center">
-						<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
-						{{ user.full_name }}
-						<h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
-						<div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
-						<div class="offcanvas-title">
-							<h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
-							<hr class="text-dark">
-							<h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
-							<!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6>  -->
-							<!-- <div class="time">5 hr</div> -->
-						</div>
-						</div>
-						</button>
-						</td>
-						{% endfor %}
-					</tr>
-					<tr>
-						{% for user in top_users4 %}
-						<td colspan = '8' class="{% cycle 'bg-success' 'bg-dark' %} text-white text-center">
-						<button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom{{ forloop.counter }}" aria-controls="offcanvasBottom{{ forloop.counter }}">
-						{{ user.full_name }}
-						<h6 class="text-white">{{ user.percent|floatformat:5 }}%</h6>
-						<div class="offcanvas offcanvas-bottom bg-success rounded shadow-sm" tabindex="-1" id="offcanvasBottom{{ forloop.counter }}" aria-labelledby="offcanvasBottomLabel{{ forloop.counter }}">
-						<div class="offcanvas-title">
-							<h5 class="offcanvas-title text-white" id="offcanvasBottomLabel{{ forloop.counter }}">مقدار کمک به خیریه</h5>
-							<hr class="text-dark">
-							<h5 class="text-white text-decoration-underline"> مقدار کمک: {{ user.total_donations }}</h5>
-							<!-- <h6 class="text-white text-decoration-underline">درصد سهم: {{ user.percent|floatformat:5 }}%</h6> -->
-							<!-- <div class="time">5 hr</div> -->
-						</div>
-						</div>
-						</button>
-						</td>
-						{% endfor %}
-					</tr>
-					</tbody>
-			</table>
-		  </div>
-		</div>
-	</div>
+	<style>
+		#container {
+		  margin: 0 auto;
+		  width: 90%;
+		}
+	</style>
+    <!-- <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded"> -->
+		<!-- <div class="container-xl"> -->
+			<!-- Pie Chart -->
+			<div id="container" style="width: 75%;">
+			<canvas id="donation-chart"></canvas>
+			</div>
+
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@latest/dist/chartjs-plugin-datalabels.min.js"></script>
+
+			<script>
+				var ctx = document.getElementById('donation-chart').getContext('2d');
+				var myChart = new Chart(ctx, {
+					type: 'pie',
+					data: {
+						labels: {{ labels|safe }},
+						datasets: [{
+							label: 'Donation Amount',
+							data: {{ data_donation|safe }},
+							backgroundColor: [
+								' #6c9f36 ',
+								' #696969 ',
+								' #680708 ',
+								' #77FF33 ',
+								' #00B3B3 ',
+								' #3CB300 '
+							],
+							borderColor: [
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF'
+							],
+							borderWidth: 1
+						},
+						{
+							label: 'Gold Value',
+							data: {{ data_gold|safe }},
+							backgroundColor: [
+								' #3CB300 ',
+								' #B30000 ',
+								' #680708 ',
+								' #77FF33 ',
+								' #00B3B3 ',
+								' #6c9f36 '
+							],
+							borderColor: [
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						responsive: true,
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						}
+					}
+				});
+			</script>
+		<!-- </div> -->
+	<!-- </div> -->
 
   	<!-- section main content -->
 	<section class="main-content">
