@@ -125,6 +125,23 @@ class OrderVertifyView(LoginRequiredMixin, View):
                     usd_sell_rate = data['usd']  # assume this is the key for the USD sell rate
                     toman_per_usd = 1 / float(usd_sell_rate['value'])  # calculate Toman per USD
 
+
+                # make API request to get the latest IRR price
+                irr_api_url = 'https://v6.exchangerate-api.com/v6/latest/'  # example API URL
+                api_params_irr = {'item': 'IRR', 'api_key': 'ab4a053319e602a65782e75e'}
+                irr_response = requests.get(irr_api_url, params=api_params_irr)
+
+                if irr_response.status_code == 200:
+                    irr_data = irr_response.json()
+                    print(irr_data)
+                    irr_rate = irr_data['IRR']['value']  # assume this is the key for the IRR rate
+
+                    # convert IRR to Toman
+                    toman_amount = amount * float(irr_rate) / 10
+
+                else:
+                    toman_amount = None
+
                 # convert currency amount to Toman
                 if currency == 'DOLLAR':
                     toman_amount = amount * toman_per_usd
@@ -170,7 +187,8 @@ class OrderVertifyView(LoginRequiredMixin, View):
                     if lira_response.status_code == 200:
                         lira_data = lira_response.json()
                         lira_to_toman_rate  = lira_data['try']['value'] 
-                        toman_amount = amount * float(lira_to_toman_rate) / 10 
+                        toman_amount = amount * float(lira_to_toman_rate) / 10
+                        print(toman_amount) 
                     else:
                         toman_amount = None
                 else:
@@ -186,8 +204,11 @@ class OrderVertifyView(LoginRequiredMixin, View):
                     print(gold_data)
                     gold_price = gold_data['18ayar']['value']  # assume this is the key for the gold price
 
-                    # convert Toman amount to gold
-                    gold_value = toman_amount / float(gold_price)
+                    if toman_amount is not None:
+                        gold_value = toman_amount / float(gold_price)
+                        print(gold_value)
+                    else:
+                        print("toman_amount is None. Please provide a valid value.")
 
                 # creating log here 
                 user1 = request.user.phone_number
