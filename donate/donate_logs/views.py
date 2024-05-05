@@ -23,11 +23,8 @@ class DonateView(View):
             amount = 0
             currency = None
 
-        if currency in 'IRR' and amount < 1000:
-            messages.error(request, "مبلغ وارد شده باید بالای هزار تومان باشد", 'danger')
-            return redirect('donate:donate')
-        elif currency in ['DOLLAR', 'EURO', 'POUND', 'IQD', 'LIRA'] and amount < 10:
-            messages.error(request, "مبلغ وارد شده پایین تر از حد مجاز است ", 'danger')
+        if amount < 1000:
+            messages.error(request, "این یک درگاه پرداخت تست است. برای وارد شدن به آن مقدار را بالای 1000 دهید", 'danger')
             return redirect('donate:donate')
         
         return redirect('donate:order_pay', amount=amount, currency=currency)
