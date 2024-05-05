@@ -25,7 +25,9 @@ class IndexView(View):
 
         labels = [user['user__full_name'] for user in top_users]
         data_donation = [user['total_donation'] for user in top_users]
+        limited_data_donation = []
         data_gold = [user['total_gold'] for user in top_users]
+        limited_data_gold = []
 
         paginator = Paginator(blogs , 2)
         page = request.GET.get('page',1)
@@ -37,14 +39,25 @@ class IndexView(View):
         except EmptyPage:
             result = paginator.page(paginator.num_pages)
 
+        
+
+
+        for i in data_donation:
+            j = "%.4f"%i
+            limited_data_donation.append(j)
+
+        
+        for i in data_gold:
+            j = "%.4f"%i
+            limited_data_gold.append(j)
 
         context = {
             'blogs' : result,
             'Lblogs' : lovely_blogs,
             'top_users': top_users,
             'labels': labels,
-            'data_donation': data_donation, 
-            'data_gold': data_gold,
+            'data_donation': limited_data_donation, 
+            'data_gold': limited_data_gold,
         }
         return render(request, 'home/index.html' , context=context)
     
