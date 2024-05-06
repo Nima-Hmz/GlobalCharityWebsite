@@ -129,7 +129,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         # toman_per_usd = 1 / float(usd_sell_rate)  # calculate Toman per USD
                         # print(toman_per_usd)
                         """ convert currency amount to Toman """
-                        toman_amount = amount * float(usd_to_toman_rate) / 1000 
+                        toman_amount = amount * float(usd_to_toman_rate)
                         # print(toman_amount)
                     else:
                         toman_amount = None
@@ -143,7 +143,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         """ Get the exchnage rate from Euro to Toman """
                         euro_to_toman_rate = euro_data['eur']['value']
                         """ Convert Euro to Toman (amount = amoun that user donate) """   
-                        toman_amount = amount * float(euro_to_toman_rate) / 1000
+                        toman_amount = amount * float(euro_to_toman_rate)
                         # print(toman_amount)
                     else:
                         toman_amount = None
@@ -158,7 +158,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         """ Get the exchnage rate from Pound to Toman """
                         pound_to_toman_rate = pound_data['gbp']['value']
                         """ Convert Pound to Toman (amount = amoun that user donate) """  
-                        toman_amount = amount * float(pound_to_toman_rate) / 1000
+                        toman_amount = amount * float(pound_to_toman_rate)
                         # print(toman_amount)  
                     else:
                         toman_amount = None
@@ -172,7 +172,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         """ Get the exchnage rate from IQD to Toman """
                         iqd_to_toman_rate = iqd_data['iqd']['value']
                         """ Convert IQD to Toman (amount = amoun that user donate) """
-                        toman_amount = amount * float(iqd_to_toman_rate) / 1000
+                        toman_amount = amount * float(iqd_to_toman_rate)
                         # print(toman_amount)
                     else:
                         toman_amount = None
@@ -183,12 +183,12 @@ class OrderVertifyView(LoginRequiredMixin, View):
                     lira_response = requests.get(lira_api_url, params=api_params4)
                     if lira_response.status_code == 200:
                         lira_data = lira_response.json()
-                        # print(lira_data)
+                        print(lira_data)
                         """ Get the exchnage rate from Euro to Toman """
                         lira_to_toman_rate  = lira_data['try']['value']
                         # print(lira_to_toman_rate)
                         """ Convert Euro to Toman (amount = amoun that user donate) """
-                        toman_amount = amount * float(lira_to_toman_rate) / 1000
+                        toman_amount = amount * float(lira_to_toman_rate)
                         # print(toman_amount)
                     else:
                         toman_amount = None
@@ -202,7 +202,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                         """ assume this is the key for the IRR rate """
                         irr_rate = irr_data['conversion_rates']['IRR']
                         """ convert IRR to Toman """
-                        toman_amount = (amount * float(irr_rate)) / 10
+                        toman_amount = (amount * float(irr_rate))
                         # print(toman_amount)
                     else:
                         toman_amount = None
@@ -221,7 +221,7 @@ class OrderVertifyView(LoginRequiredMixin, View):
                     gold_price = gold_data['18ayar']['value']
 
                     if toman_amount is not None:
-                        gold_value = toman_amount / float(gold_price)
+                        gold_value = toman_amount / float(gold_price) 
                         # print(gold_value)
                     else:
                         print("toman_amount is None. Please provide a valid value.")
