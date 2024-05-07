@@ -13,6 +13,8 @@ from donate_logs.models import DonateLog
 
 from newsletters.models import *
 
+from django.db.models import Q
+
 # Index View
 class IndexView(View):
     def get(self, request):
@@ -51,6 +53,12 @@ class IndexView(View):
             j = "%.4f"%i
             limited_data_gold.append(j)
 
+
+        query_name = request.GET.get("search")
+        if query_name:
+            result = blogModel.objects.filter(Q(title__icontains=query_name) | Q(body__icontains=query_name))
+
+            
         context = {
             'blogs' : result,
             'Lblogs' : lovely_blogs,
@@ -125,3 +133,41 @@ class NewslettersView(View):
 
         return redirect('home:index')
 
+
+
+
+class SearchResultsView(View):
+    def get(self, request):
+
+        
+        
+        query_name = request.GET.get("q")
+        p_list = blogModel.objects.filter(Q(title__icontains=query_name) | Q(body__icontains=query_name))
+        
+
+
+        paginator = Paginator(p_list, 2)
+        page = request.GET.get('page', 1)
+
+
+        try :
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.page(paginator.num_pages)
+
+        
+        url = request.get_full_path()
+        context = {
+            'p_list': result,
+            'query_name': query_name,
+            'categories': categories,
+            'url': url,
+            'best_seller': Product.objects.filter(best_seller=True),
+            'offer': Product.objects.filter(offer=True),
+            'star': Product.objects.filter(star=True),
+            'brand':Product.objects.filter(brand=True),
+        }
+
+        return render(request, 'search/search_results.html', context)

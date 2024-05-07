@@ -193,7 +193,7 @@
 										</a>
 									</div>
 									<div class="details clearfix">
-										<h6 class="post-title my-0"><a href="blog-single.html">{{ blog.title }}</a></h6>
+										<h6 class="post-title my-0"><a href="{% url 'article:blog_detail' blog.slug %}">{{ blog.title }}</a></h6>
 										<ul class="meta list-inline mt-1 mb-0">
 											<li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
 										</ul>
