@@ -2,12 +2,5 @@
 .idea
 .vscode
 
-# temp database
-Kadmotor/db.sqlite3
-
-# temp files
-Kadmotor/media
-
-# cache files
-Kadmotor/__pycache__
-Kadmotor/*/__pycache__
+# venv 
+venv1/
