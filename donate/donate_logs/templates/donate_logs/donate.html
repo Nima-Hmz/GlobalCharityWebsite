@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- page header -->
+    <section class="page-header">
+        <div class="container-xl">
+            <div class="text-center">
+                <h1 class="mt-0 mb-2">حمایت</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">حمایت</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-content">
+        <div class="container-xl">
+
+
+                    <!-- post single -->
+                    <div class="post post-single">
+                        <!-- post content -->
+                        <div class="post-content clearfix">
+                            <p>در وقف با اشاره به اینکه اصل مال باقی بوده و درآمد آن مصرف می‌شود، این شیوه باعث حفظ اموال و دارایی‌ها می شود، رشد تولید ملی را نیز به همراه خواهد داشت و در توزیع عادلانه درآمد ملی مؤثر است زیرا ثروتمندان، برخی از اموالشان را وقف می‌کنند که عواید آن، میان فقیران توزیع می شود؛ به این ترتیب، این ثروت به تمام افراد جامعه می‌رسد. وقف از جهاتی می‌تواند بر افزایش درآمد سرانه تاثیر داشته باشد؛ هم از جهت افزایش تولید ناخالص داخلی؛ یعنی به هر میزان که تولید ناخالص داخلی افزایش یابد، به همان میزان هم بر درآمد سرانه و هم بر قدرت خرید افزوده می‌شود. مهمتر از همه این‌که بخش وقف، بهترین تأثیر را می‌تواند بر روی اصلی‌ترین عامل توسعه اقتصادی یعنی موجودی سرمایه انسانی داشته باشد.</p>
+
+                            <p>تجلی روحیه انفاق، ایثار، فداکاری و نیکوکاری در قالب سنت حسنه وقف یکی از مهم‌ترین راه‌های رسیدن به جایگاه مطلوب تمدن اسلامی است. از آنجا که وقف، سرمایه‌گذاری برای رفع نیازهای پایدار عام‌المنفعه است، یک هویت اجتماعی دارد و با ایجاد ساختارهایی بر اساس نیاز جامعه و تبدیل مالکیت خصوصی به مالکیت جمعی و عمومی در قالب یک نهاد کلان اجتماعی در همه شئون جامعه از جمله فرهنگ، اقتصاد، سیاست، تعلیم و تربیت، امنیت و … موثر است.
+                            </p>
+
+                            <center>
+                            <figure class="figure">
+                                <img src="{% static 'assets/images/donate.jpg' %}" class="figure-img img-fluid rounded" alt="...">
+                                <figcaption class="figure-caption text-center"></figcaption>
+                            </figure>
+                            </center>
+
+
+
+
+                            <p>گسترش فرهنگ وقف میزان فقر و محرومیت را در جامعه کاهش می‌دهد؛ از آنجا که وقف یکی از راه‌های توزیع مجدد درآمد است، با توزیع مجدد درآمد، سرمایه‌های جامعه در اختیار همگان قرار می‌گیرد و با بهره‌مندی همگان از امکانات رفاهی و اقتصادی، زمینه‌های تکامل در ابعاد فرهنگی و اجتماعی فراهم می‌شود.</p></div>
+                        <!-- post bottom section -->
+                        <div class="post-bottom">
+                        </div>
+
+                    </div>
+
+
+                    <!-- section header -->
+
+                    <!-- post comments -->
+
+                    <!-- section header -->
+                    <div class="section-header">
+                    </div>
+                    <!-- comment form -->
+                    <p>شما هم میتوانید از طریق این سامانه و فرم زیر در این امر خیر شرکت کنید.</p>
+                    {% if user.is_authenticated %}
+
+                            <div class="container-xl">
+                        
+                            <!-- widget newsletter -->
+                            <div class="widget rounded">
+                                <div class="widget-header text-center">
+                                </div>
+                                <div class="widget-content">
+                                    <form method="post">
+                                        <div class="mb-1">
+                                            <input class="form-control w-100 text-center" placeholder="مبلغ مورد نظر خود برای حمایت را وارد کنید (تومان)" type="text" name="amount" id="amount">
+                                            <br>
+                                        </div>
+                                        <div class="mb-4">
+                                            <select name="currency" id="currency" class="form-control w-100 text-center">
+                                            <option value="IRR">تومان</option>
+                                            <option value="DOLLAR">دلار</option>
+                                            <option value="EURO">یورو</option>
+                                            <option value="POUND">پوند</option>
+                                            <option value="IQD">دینار عراق</option>
+                                            <option value="LIRA">لیر</option>
+                                            
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-default btn-full" type="submit">ادامه</button>
+                                    </form>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    {% else %}
+                        <div class="container-xl">
+                    
+                        <!-- widget newsletter -->
+                        <div class="widget rounded">
+                            <div class="widget-header text-center">
+                            </div>
+                            <div class="widget-content">
+                                <center>
+                                <h3>برای حمایت کردن ابتدا وراد حساب کاربری خود شوید</h3>
+                                <span class="newsletter-privacy text-center mt-3"><a href="{% url 'account:user_login' %}">ورود به حساب کاربری</a></span>
+                                <span class="newsletter-privacy text-center mt-3">هنوز حسابی ندارید؟ <a href="{% url 'account:user_register' %}">ثبت نام</a></span>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+        </div>
+    </section>
+
+
+{% endblock %}

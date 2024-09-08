@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- page header -->
+    <section class="page-header">
+        <div class="container-xl">
+            <div class="text-center">
+                <h1 class="mt-0 mb-2">تایید شماره موبایل</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">ثبت نام</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+<section class="main-content">
+    <div class="container-xl">
+    <!-- Contact Form -->
+    <form id="contact-form" class="contact-form" method="post">
+
+        <div class="messages"></div>
+
+        <div class="row">
+            <div class="column col-md-6">
+                <!-- Name input -->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="vertifycode" id="vertifycode"
+                            placeholder="کد تایید ارسال شده به شماره خود را وارد کنید" required="required"
+                            data-error="نوشتن نام الزامی است">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" name="submit" id="submit" value="submit" class="btn btn-default">ادامه 
+        </button><!-- Send Button -->
+
+    </form>
+    <!-- Contact Form end -->
+
+</div>
+</section>
+
+
+{% endblock %}

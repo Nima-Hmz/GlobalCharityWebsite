@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- page header -->
+    <section class="page-header">
+        <div class="container-xl">
+            <div class="text-center">
+                <h1 class="mt-0 mb-2">ثبت نام</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">ثبت نام</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+<section class="main-content">
+    <div class="container-xl">
+    <!-- Contact Form -->
+    <form id="contact-form" class="contact-form" method="post">
+
+        <div class="messages"></div>
+
+        <div class="row">
+            <div class="column col-md-6">
+                <!-- Name input -->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="full_name" id="full_name"
+                            placeholder="نام خود را وارد کنید" required="required"
+                            data-error="نوشتن نام الزامی است">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+
+            <div class="column col-md-6">
+                <!-- Email input -->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="phone_number" name="phone_number"
+                            placeholder="شماره موبایل خود را وارد کنید" required="required"
+                            data-error="نوشتن ایمیل الزامی است">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+
+            <div class="column col-md-6">
+                <!-- Name input -->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="password" id="password"
+                            placeholder="رمز خود را وارد کنید" required="required"
+                            data-error="نوشتن نام الزامی است">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+
+            <div class="column col-md-6">
+                <!-- Email input -->
+                <div class="form-group">
+                    <input type="text" class="form-control" id="conpass" name="conpass"
+                            placeholder="رمز خود را تایید کنید" required="required"
+                            data-error="نوشتن ایمیل الزامی است">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            
+            <div class="column col-md-12">
+                <!-- Email input -->
+                <div class="form-group">
+                    <input type="checkbox" id="display_name" name="display_name" value="False">
+                    <label for="display_name">درخواست عدم نمایش نام کاربری برای عموم در وب سایت</label>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" name="submit" id="submit" value="submit" class="btn btn-default">ادامه 
+        </button><!-- Send Button -->
+
+    </form>
+    <!-- Contact Form end -->
+
+</div>
+</section>
+
+
+{% endblock %}

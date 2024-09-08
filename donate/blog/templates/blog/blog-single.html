@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block content %}
+
+    <!-- section main content -->
+    <section class="main-content mt-3">
+        <div class="container-xl">
+
+        
+            <div class="row gy-4">
+
+                <div class="col-lg-8">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'home:index' %}">صفحه اصلی</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ blog.title }}</li>
+                        </ol>
+                    </nav>
+                    <!-- post single -->
+                    <div class="post post-single">
+                        <!-- post header -->
+                        <div class="post-header">
+                            <h1 class="title mt-0 mb-3">{{ blog.title }}</h1>
+                            <ul class="meta list-inline mb-0">
+                                <li class="list-inline-item"></li>
+                                <li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d' }}</li>
+                            </ul>
+                        </div>
+                        <!-- featured image -->
+                        <div class="featured-image">
+                            <img src="{{ blog.image.url }}" alt="post-title"/>
+                        </div>
+                        <!-- post content -->
+                        <div class="post-content clearfix">
+                            <p> {{ blog.body | safe }} </p>
+                        
+                    </div>
+
+                    <div class="spacer" data-height="50"></div>
+
+                    <div class="spacer" data-height="50"></div>
+
+                    <!-- section header -->
+                    <div class="section-header">
+                        <h3 class="section-title">نظر ({{ comments.count }})</h3>
+                        <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
+                    </div>
+                    <!-- post comments -->
+                    <div class="comments bordered padding-30 rounded">
+                            
+                        <ul class="comments">
+                            <!-- comment item -->
+                            {% for comment in comments %}
+                            <li class="comment rounded">
+                                <div class="thumb"> 
+                                <img style="width: 30%;" src="{% static 'assets/images/other/profile.jpg' %}" alt="">
+                                </div>
+                                <div class="details">
+                                    <h4 class="name"><a href="#">{{ comment.name }}</a></h4>
+                                    <span class="date">{{ comment.date | to_jalali }} </span>
+                                    <p> {{ comment.body }} </p>
+                                </div>
+                            </li>
+                            
+                                {% for reply in comment.recomment.all %}
+                                <li class="comment child rounded">
+                                    <div class="thumb">
+                                        <img style="width: 30%;" src="{% static 'assets/images/other/profile.jpg' %}" alt="">
+                                    </div>
+                                    <div class="details">
+                                        <h4 class="name"><a href="#">مدیر وب سایت</a></h4>
+                                        <span class="date">{{ reply.dateTime }}</span>
+                                        <p> {{ reply.replyText }} </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+
+                    <div class="spacer" data-height="50"></div>
+
+                    <!-- section header -->
+                    <div class="section-header">
+                        <h3 class="section-title">ارسال نظر</h3>
+                        <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave"/>
+                    </div>
+                    <!-- comment form -->
+                    <div class="comment-form rounded bordered padding-30">
+
+                        <form id="comment-form" class="comment-form" method="post">
+
+                            <div class="messages"></div>
+
+                            <div class="row">
+
+                                <div class="column col-md-12">
+                                    <!-- Comment textarea -->
+                                    <div class="form-group">
+                                        <textarea name="InputComment" id="InputComment" class="form-control" rows="4"
+                                                  placeholder="متن نظر خود را بنویسید ..." required="required"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="column col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="InputName" name="InputName"
+                                               placeholder="نام خود را بنویسید" required="required">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button type="submit" name="submit" id="submit" value="submit" class="btn btn-default">
+                                ارسال پیام
+                            </button><!-- Submit Button -->
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

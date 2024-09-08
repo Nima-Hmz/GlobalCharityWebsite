@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+{% block content %}
+
+	<section class="page-header">
+		<div class="container-xl">
+			<div class="text-center">
+				<h1 class="mt-0 mb-2">جدول آماری</h1>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'donate:donate' %}">برای حمایت اینجا کلیک نمایید</a></li>
+						<!-- <li class="breadcrumb-item active" aria-current="page">حمایت</li> -->
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</section>
+
+	<!-- page content -->
+	<style>
+		#container {
+		  margin: 0 auto;
+		  width: 90%;
+		}
+	</style>
+    <!-- <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded"> -->
+		<!-- <div class="container-xl"> -->
+			<!-- Pie Chart -->
+			<div id="container" style="width: 75%;">
+			<canvas id="donation-chart"></canvas>
+			</div>
+
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@latest/dist/chartjs-plugin-datalabels.min.js"></script>
+
+			<script>
+				var ctx = document.getElementById('donation-chart').getContext('2d');
+				var myChart = new Chart(ctx, {
+					type: 'pie',
+					data: {
+						labels: {{ labels|safe }},
+						datasets: [{
+							label: 'Donation Amount',
+							data: {{ data_donation|safe }},
+							backgroundColor: [
+								' #6c9f36 ',
+								' #696969 ',
+								' #680708 ',
+								' #77FF33 ',
+								' #00B3B3 ',
+								' #3CB300 '
+							],
+							borderColor: [
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF'
+							],
+							borderWidth: 1
+						},
+						{
+							label: 'Gold Value',
+							// data: {{ data_gold|safe }},
+							backgroundColor: [
+								' #3CB300 ',
+								' #B30000 ',
+								' #680708 ',
+								' #77FF33 ',
+								' #00B3B3 ',
+								' #6c9f36 '
+							],
+							borderColor: [
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF',
+								'#FFFFFF'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						responsive: true,
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						}
+					}
+				});
+			</script>
+		<!-- </div> -->
+	<!-- </div> -->
+
+  	<!-- section main content -->
+	<section class="main-content">
+		<div class="container-xl">
+
+			<div class="row gy-4">
+				<div class="col-lg-8">
+
+					{% for blog in blogs %}
+
+					<!-- blog -->
+					<div class="post post-classic rounded bordered">
+						<div class="thumb top-rounded">
+							<span class="post-format">
+								<i class="icon-picture"></i>
+							</span>
+							<a href="{% url 'article:blog_detail' blog.slug %}">
+								<div class="inner">
+									<img src="{{ blog.image.url }}" alt="post-title" />
+								</div>
+							</a>
+						</div>
+						<div class="details">
+							<ul class="meta list-inline mb-0">
+								<li class="list-inline-item"> در تاریخ {{ blog.updated | to_jalali:'%y/%m/%d' }}</li>
+								<li class="list-inline-item"><i class="icon-bubble"></i> (0)</li>
+							</ul>
+							<h5 class="post-title mb-3 mt-3"><a href="{% url 'article:blog_detail' blog.slug %}">{{ blog.title }}</a></h5>
+							<p class="excerpt mb-0">{{ blog.body | safe | truncatewords:30 }}</p>
+						</div>
+						<div class="post-bottom clearfix d-flex align-items-center">
+							<div class="social-share me-auto">
+								<button class="toggle-button icon-share"></button>
+								
+							</div>
+							<div class="float-end d-none d-md-block">
+								<a href="{% url 'article:blog_detail' blog.slug %}" class="more-link">ادامه مطلب<i class="icon-arrow-left"></i></a>
+							</div>
+							<div class="more-button d-block d-md-none float-end">
+								<a href="{% url 'article:blog_detail' blog.slug %}"><span class="icon-options"></span></a>
+							</div>
+						</div>
+					</div>
+
+					{% endfor %}
+					{% if blogs.has_other_pages %}
+					<nav>
+						<ul class="pagination justify-content-center">
+							{% for i in blogs.paginator.page_range %}
+                                {% if blogs.number == i %}
+								<li class="page-item active" aria-current="page">
+									<span class="page-link">{{i}}</span>
+								</li>
+								{% else %}
+								<li class="page-item"><a class="page-link" href="?page={{ i }}&{{checked}}">{{i}}</a></li>
+								{% endif %}
+                                {% endfor %}
+						</ul>
+					</nav>
+					{% endif %}
+
+				</div>
+
+				<div class="col-lg-4">
+
+					<!-- sidebar -->
+					<div class="sidebar">
+						<!-- widget about -->
+						<div class="widget rounded">
+							<div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
+								<p class="mb-4">سلام، ما ... </p>
+								<ul class="social-icons list-unstyled list-inline mb-0">
+									<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+									<li class="list-inline-item"><a href="#"><i class="fab fa-telegram"></i></a></li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- widget مطالب محبوب -->
+						<div class="widget rounded">
+							<div class="widget-header text-center">
+								<h3 class="widget-title">مطالب محبوب</h3>
+								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
+							</div>
+							<div class="widget-content">
+								{% for blog in Lblogs %}
+								<!-- post -->
+								<div class="post post-list-sm circle">
+									<div class="thumb circle">
+										<span class="number">{{ blog.id }}</span>
+										<a href="blog-single.html">
+											<div class="inner">
+												<img src="{{ blog.image.url }}" alt="{{ blog.title }}" />
+											</div>
+										</a>
+									</div>
+									<div class="details clearfix">
+										<h6 class="post-title my-0"><a href="{% url 'article:blog_detail' blog.slug %}">{{ blog.title }}</a></h6>
+										<ul class="meta list-inline mt-1 mb-0">
+											<li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
+										</ul>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+
+						
+
+						<!-- widget newsletter -->
+						<div class="widget rounded">
+							<div class="widget-header text-center">
+								<h3 class="widget-title">خبرنامه</h3>
+								<img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
+							</div>
+							<div class="widget-content">
+								<span class="newsletter-headline text-center mb-3">به 70,000 مشترک ما بپیوندید!</span>
+								<form method="post" , action="{% url 'home:add_member' %}">
+									<div class="mb-2">
+										<input name="email-field" class="form-control w-100 text-center" placeholder="ایمیل خود را بنویسید ..." type="email" required>
+									</div>
+									<button class="btn btn-default btn-full" type="submit">ثبت نام</button>
+								</form>
+							</div>
+						</div>
+
+					
+						<!-- widget advertisement -->
+						<div class="widget no-container rounded text-md-center">
+							<span class="ads-title">- تبلیغات -</span>
+							<a href="#" class="widget-ads">
+								<img src="{% static 'assets/images/ads/ad-360.png' %}" alt="Advertisement" />
+							</a>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</section>
+	
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- page header -->
+    <section class="page-header">
+        <div class="container-xl">
+            <div class="text-center">
+                <h1 class="mt-0 mb-2">چارت آزمایشی</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center mb-0">
+                        <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">حمایت</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie Chart -->
+    <style>
+		#container {
+		  margin: 0 auto;
+		  width: 90%;
+		}
+	</style>
+    <h1 class="text-center">Multi Series Pie Chart</h1>
+    <div id="container" style="width: 75%;">
+    <canvas id="donation-chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@latest/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <script>
+        var ctx = document.getElementById('donation-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: 'Donation Amount',
+                    data: {{ data_donation|safe }},
+                    backgroundColor: [
+                        ' #6c9f36 ',
+                        ' #696969 ',
+                        ' #680708 ',
+                        ' #77FF33 ',
+                        ' #00B3B3 ',
+                        ' #3CB300 '
+                    ],
+                    borderColor: [
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF'
+                    ],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Gold Value',
+                    data: {{ data_gold|safe }},
+                    backgroundColor: [
+                        ' #3CB300 ',
+                        ' #B30000 ',
+                        ' #680708 ',
+                        ' #77FF33 ',
+                        ' #00B3B3 ',
+                        ' #6c9f36 '
+                    ],
+                    borderColor: [
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF',
+                        '#FFFFFF'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+      </script>
+    
+{% endblock %}

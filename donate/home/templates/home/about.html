@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block content %}
+
+<!-- page header -->
+<section class="page-header">
+    <div class="container-xl">
+        <div class="text-center">
+            <h1 class="mt-0 mb-2">درباره ما</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'home:index' %}">صفحه اصلی</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">درباره ما</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- section main content -->
+<section class="main-content">
+    <div class="container-xl">
+
+        <div class="row gy-4">
+
+
+            <div class="col-lg-8">
+
+                <div class="page-content bordered rounded padding-30">
+
+                    <img style="width: 100%;" src="{% static 'assets/images/other/donate.jpg' %}" alt="" class="rounded mb-4"/>
+                    {% for detail in details %}
+                    <p> {{ detail.Detail | safe }} </p>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+
+                <!-- sidebar -->
+                <div class="sidebar">
+                    <!-- widget about -->
+                    <div class="widget rounded">
+                        <div class="widget-about data-bg-image text-center" data-bg-image="images/map-bg.png">
+                            <p class="mb-4">سلام، ما ... </p>
+                            <ul class="social-icons list-unstyled list-inline mb-0">
+                                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fab fa-telegram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- widget مطالب محبوب -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">مطالب محبوب</h3>
+                            <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            {% for blog in Lblogs %}
+                            <!-- post -->
+                            <div class="post post-list-sm circle">
+                                <div class="thumb circle">
+                                    <span class="number">{{ blog.id }}</span>
+                                    <a href="blog-single.html">
+                                        <div class="inner">
+                                            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="details clearfix">
+                                    <h6 class="post-title my-0"><a href="blog-single.html">{{ blog.title }}</a></h6>
+                                    <ul class="meta list-inline mt-1 mb-0">
+                                        <li class="list-inline-item">{{ blog.updated | to_jalali:'%y/%m/%d _ %H:%M:%S' }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    
+
+                    <!-- widget newsletter -->
+                    <div class="widget rounded">
+                        <div class="widget-header text-center">
+                            <h3 class="widget-title">خبرنامه</h3>
+                            <img src="{% static 'assets/images/wave.svg' %}" class="wave" alt="wave" />
+                        </div>
+                        <div class="widget-content">
+                            <span class="newsletter-headline text-center mb-3">به 70,000 مشترک ما بپیوندید!</span>
+                            <form>
+                                <div class="mb-2">
+                                    <input class="form-control w-100 text-center" placeholder="ایمیل خود را بنویسید ..." type="email">
+                                </div>
+                                <button class="btn btn-default btn-full" type="submit">ثبت نام</button>
+                            </form>
+                            <span class="newsletter-privacy text-center mt-3">با ثبت نام، با <a href="#">سیاست حفظ حریم خصوصی ما</a> موافقت می کنید</span>
+                        </div>
+                    </div>
+
+                
+                    <!-- widget advertisement -->
+                    <div class="widget no-container rounded text-md-center">
+                        <span class="ads-title">- تبلیغات -</span>
+                        <a href="#" class="widget-ads">
+                            <img src="{% static 'assets/images/ads/ad-360.png' %}" alt="Advertisement" />
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
