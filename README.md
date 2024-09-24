@@ -12,14 +12,11 @@ The use of API-powered currency conversions adds reliability and transparency to
 We have used the Navasan.net API for real-time currency conversion.
 
 ## Features
-Multi-currency support: Users can donate using various currencies, which are converted to a universal gold value.
-Gold-based ranking system: Donations are converted into gold using real-time exchange rates from external APIs, and users are ranked based on their total gold contributions.
-<br>
-Leaderboards: Displays a public ranking of top donors by gold value to encourage participation.
-<br>
-API integration: Utilizes reliable third-party APIs to ensure accurate currency-to-gold conversions.
-<br>
-User-friendly design: Intuitive interface for seamless donation experience.
+- Multi-currency support: Users can donate using various currencies, which are converted to a universal gold value.
+- Gold-based ranking system: Donations are converted into gold using real-time exchange rates from external APIs, and users are ranked based on their total gold contributions.
+- Leaderboards: Displays a public ranking of top donors by gold value to encourage participation.
+- API integration: Utilizes reliable third-party APIs to ensure accurate currency-to-gold conversions.
+- User-friendly design: Intuitive interface for seamless donation experience.
 
 ## Installation
 1) Clone the repository:
