@@ -16,6 +16,7 @@ Multi-currency support: Users can donate using various currencies, which are con
 Gold-based ranking system: Donations are converted into gold using real-time exchange rates from external APIs, and users are ranked based on their total gold contributions.
 <br>
 Leaderboards: Displays a public ranking of top donors by gold value to encourage participation.
+<br>
 API integration: Utilizes reliable third-party APIs to ensure accurate currency-to-gold conversions.
 User-friendly design: Intuitive interface for seamless donation experience.
 
