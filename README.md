@@ -18,6 +18,7 @@ Gold-based ranking system: Donations are converted into gold using real-time exc
 Leaderboards: Displays a public ranking of top donors by gold value to encourage participation.
 <br>
 API integration: Utilizes reliable third-party APIs to ensure accurate currency-to-gold conversions.
+<br>
 User-friendly design: Intuitive interface for seamless donation experience.
 
 ## Installation
